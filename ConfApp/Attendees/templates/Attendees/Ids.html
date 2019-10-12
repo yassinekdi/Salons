@@ -1,0 +1,69 @@
+{% extends "Attendees/header_attendees.html" %}
+{% block content %}
+
+<div class="content">
+        <div class="row">
+            {% for elt in users %}
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="row pb-1">
+                            <div class="col-4">
+                                {% if elt.is_organizer %}
+                                    <span class="badge badge-dark"> organizer </span>
+                                {% endif %}
+                            </div>
+                            <div class="col-4"> </div>
+                            <div class="col-4">
+                                {% if elt.is_authenticated %}
+                                    <span class="badge badge-success"> online </span>
+                                {% else %}
+                                    <span class="badge badge-secondary"> offline </span>
+                                {% endif %}
+                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                {% if elt.is_presenting %}
+                                    <span class="badge badge-dark"> speaker </span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="member-card pt-2 pb-2">
+                                {% load static %}
+                                {% if elt.sex == "Female" %}
+                                    <div class="thumb-lg member-thumb mx-auto"><img src="{% static 'Attendees/Icons/icon_female_user.png' %}" class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                                {% else %}
+                                    <div class="thumb-lg member-thumb mx-auto"><img src="{% static 'Attendees/Icons/icon_male_user.png' %}" class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                                {% endif %}
+                                <div class="">
+                                    <h4>{{elt.first_name}} {{elt.last_name}}</h4>
+                                    <p class="text-muted"><b>{{elt.status}} <span>| </span><span>{{elt.organism }} </span><span>| </span><span>{{elt.country}}</span></b> </p>
+                                    <p class="text-muted">{{ elt.email }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            <div class="row pt-1">
+                                <div class="col-4"> <button type="button" class="btn btn-primary mt-2 btn-rounded waves-effect w-md waves-light">Message</button></div>
+                                <div class="col-4"></div>
+                                <div class="col-4"> <button type="button" class="btn btn-primary mt-2 btn-rounded waves-effect w-md waves-light">Localize</button></div>
+                            </div>
+                        </p>
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="col-4"><a href="{% url 'Infos_page' user.slug %}" class="text-pink">Infos</a></div>
+                            <div class="col-4"></div>
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+
+    <!-- container -->
+</div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "Account/header.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">IMG</div>
+    <div class="row">
+        <div class="col-6">
+            <form action="{% url 'edit_page' %}" class="GET">
+                   <p>First name: {{ profile_page.first_name }}
+                   <p>Last name: {{ profile_page.last_name }}</p>
+                   <p>Email: {{ profile_page.email }}</p>
+                   <p>Status: {{ profile_page.status }}</p>
+                   <p>Organism: {{ profile_page.organism }}</p>
+                   <p>Key words: {{ profile_page.key_words }}</p>
+                   <p>Webpage : {{ profile_page.webpage }}</p>
+                  {% if profile_page.slug == user.slug %}
+                    <button class = "btn btn-outline-success" type="submit">Edit profile</button>
+                  {% endif %}
+            </form>
+        </div>
+        {% if profile_page.slug != user.slug %}
+        <div class="col-4">
+            <p><button class="btn btn-primary"> Message </button></p>
+            <p><button class="btn btn-primary"> Localize </button></p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

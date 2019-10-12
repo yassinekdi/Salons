@@ -1,0 +1,64 @@
+{% extends "Account/header.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-4">
+                {{ registration_form.email|as_crispy_field }}
+            </div>
+            <div class="col-4">
+                {{ registration_form.password1|as_crispy_field }}
+            </div>
+            <div class="col-4">
+                {{ registration_form.password2|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                {{ registration_form.first_name|as_crispy_field }}
+            </div>
+            <div class="col-4">
+                {{ registration_form.last_name|as_crispy_field }}
+            </div>
+            <div class="col-4">
+                {{ registration_form.sex|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                {{ registration_form.status|as_crispy_field }}
+            </div>
+            <div class="col-4">
+                {{ registration_form.organism|as_crispy_field }}
+            </div>
+            <div class="col-4">
+                {{ registration_form.country|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                {{ registration_form.key_words|as_crispy_field }}
+            </div>
+            <div class="col-4">
+                {{ registration_form.webpage|as_crispy_field }}
+            </div>
+        </div>
+ <!--        {% for field in registration_form %}-->
+<!--            <p>-->
+<!--                {{field.label_tag}}-->
+<!--                {{field}}-->
+
+<!--                {% for error in field.errors %}-->
+<!--                    <p style="color: red;">{{error}}</p>-->
+<!--                {% endfor %}-->
+<!--            </p>-->
+<!--        {% endfor %}-->
+
+        <button class = "btn btn-outline-success" type="submit">register</button>
+    </form>
+    If you already have an account, <a href="{% url 'login_page' %}"><strong>login</strong> </a> instead.
+
+{% endblock %}
+
+

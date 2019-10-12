@@ -1,0 +1,25 @@
+.thumb-lg {
+    height: 88px;
+    width: 88px;
+}
+
+.card {
+    padding: 20px;
+    border-radius: 3px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #fff;
+}
+.text-pink {
+    color: #ff679b!important;
+}
+.btn-rounded {
+    border-radius: 2em;
+}
+.text-muted {
+    color: #98a6ad!important;
+}
+h4 {
+    line-height: 22px;
+    font-size: 18px;
+}
