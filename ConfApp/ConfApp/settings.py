@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'Attendees.apps.AttendeesConfig',
     'crispy_forms',
+    'messaging',
+    'channels',
     'Account.apps.AccountConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -71,8 +73,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ConfApp.wsgi.application'
+ASGI_APPLICATION = 'ConfApp.routing.application'
 
-
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 

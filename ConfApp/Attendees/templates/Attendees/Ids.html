@@ -46,9 +46,9 @@
                         </div>
                         <p>
                             <div class="row pt-1">
-                                <div class="col-4"> <button type="button" class="btn btn-primary mt-2 btn-rounded waves-effect w-md waves-light">Message</button></div>
+                                <div class="col-4"> <input type="button" id="message_btn" class="btn btn-primary mt-2 btn-rounded waves-effect w-md waves-light" value="Message"/></div>
                                 <div class="col-4"></div>
-                                <div class="col-4"> <button type="button" class="btn btn-primary mt-2 btn-rounded waves-effect w-md waves-light">Localize</button></div>
+                                <div class="col-4"> <input type="button" id="localize_btn" class="btn btn-primary mt-2 btn-rounded waves-effect w-md waves-light" value="Localize"/></div>
                             </div>
                         </p>
                         <div class="row">
@@ -63,7 +63,14 @@
 
         </div>
 
-    <!-- container -->
+    <script>
+        document.querySelector('#message_btn').onclick = function(e) {
+        window.location.pathname = 'chat/'+'slug'
+
+        };
+
+
+    </script>
 </div>
 
 {% endblock %}
