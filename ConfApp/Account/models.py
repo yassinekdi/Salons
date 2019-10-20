@@ -58,7 +58,7 @@ class Account(AbstractUser):
 
 
     def __str__(self):
-        return self.email
+        return self.slug
 
 
     def has_perm(self, perm, obj=None):

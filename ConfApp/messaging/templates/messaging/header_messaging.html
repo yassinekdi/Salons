@@ -4,18 +4,12 @@
     <link rel="stylesheet" href="{% static 'Attendees/style.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'messaging/style.css' %}" />
 </head>
- <script src="https://unpkg.com/feather-icons"></script>
+<script src="https://unpkg.com/feather-icons"></script>
+<script src="{% static 'messaging/reconnecting-websocket.js' %}"></script>
   {% include "Attendees/includes/Navbar_Attendees.html" %}
   {% include "Account/includes/messages.html" %}
 <body>
 
-<div class="row justify-content-center p-5">
-    <form class="form-inline" action="" method="POST">
-         {% csrf_token %}
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name='q'>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-</div>
   {% block content %}
   {% endblock %}
 
