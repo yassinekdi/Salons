@@ -20,11 +20,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
 
     def msg_to_json(self, message):
+        msg_time = message.timestamp
+        hour,minute,am_pm,month,day = msg_time.hour,msg_time.minute,msg_time.strftime('%p'),\
+                                      msg_time.strftime('%b'),msg_time.day
+        msg_time_str = str(hour) +':'+str(minute)+' '+ am_pm + ' | ' + month + ' '+ str(day)
         return {
             'id': message.id,
             'sender': message.sender.slug,
             'content': message.content,
-            'timestamp': str(message.timestamp)
+            'timestamp': msg_time_str
         }
 
 
@@ -39,7 +43,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         new_msg = Message.objects.create(sender=sender_account,
                                          content = data['message'])
-        return self.msg_to_json(new_msg)
+        content = {
+            'command': 'new_message',
+            'message': self.msg_to_json(new_msg)
+        }
+        return content
 
     commands = {
         'fetch_messages': fetch_messages,
