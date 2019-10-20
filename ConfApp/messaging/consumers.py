@@ -2,7 +2,6 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from .models import Message
 from Account.models import Account
 import json
-
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_slug']
@@ -28,8 +27,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'timestamp': str(message.timestamp)
         }
 
-    def send_msg(self,message):
-        self.send(text_data=json.dumps(message))
+
 
     def fetch_messages(self,data):
         pass
@@ -39,17 +37,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
         sender_slug = data['from']
         sender_account = Account.objects.get(slug=sender_slug)
 
-        message = Message.objects.create(sender=sender_account,
+        new_msg = Message.objects.create(sender=sender_account,
                                          content = data['message'])
-
-        content = {
-            'command': 'new_message',
-            'message': self.msg_to_json(message)
-        }
-        return self.send_msg(content)
-
-
-
+        return self.msg_to_json(new_msg)
 
     commands = {
         'fetch_messages': fetch_messages,
@@ -58,13 +48,21 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def receive(self, text_data):
         data = json.loads(text_data)
-        self.commands[data['command']](self,data)
+        content = self.commands[data['command']](self,data)
+        await self.channel_layer.group_send(
+            self.room_group_name,
+            {
+                'type': 'chat_message',
+                'message': content
+            }
+        )
+
 
     async def chat_message(self, event):
-        message = event['message']
+        content = event["message"]
 
         # Send message to WebSocket
         await self.send(text_data=json.dumps({
-            'message': message
+            'message': content
         }))
 
