@@ -47,6 +47,7 @@
                         <p>
                             <div class="row pt-1">
                                 <div class="col-4"> <input type="button" id="message_btn" class="btn btn-primary mt-2 btn-rounded waves-effect w-md waves-light" value="Message"/></div>
+<!--                        <button class = "btn btn-outline-success" type="submit">Edit profile</button>-->
                                 <div class="col-4"></div>
                                 <div class="col-4"> <input type="button" id="localize_btn" class="btn btn-primary mt-2 btn-rounded waves-effect w-md waves-light" value="Localize"/></div>
                             </div>
@@ -64,9 +65,18 @@
         </div>
 
     <script>
+        var discussion_slug = discussion_slug_generator(3, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+
         document.querySelector('#message_btn').onclick = function(e) {
-        window.location.pathname = 'chat/'+'slug'
+        window.location.pathname = 'chat/'+discussion_slug
         };
+
+        function discussion_slug_generator(length, chars) {
+        var result = '';
+        for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+        return result;
+        }
+
 
 
     </script>

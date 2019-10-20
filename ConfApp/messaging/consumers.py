@@ -1,7 +1,14 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
-from .models import Message
+from .models import Message, Discussion
 from Account.models import Account
 import json
+from django.shortcuts import get_object_or_404
+
+# def get_current_discussion(discussionId):
+#     return get_object_or_404(Discussion, id=discussionId)
+
+
+
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_slug']
@@ -32,25 +39,30 @@ class ChatConsumer(AsyncWebsocketConsumer):
         }
 
 
-
-    def fetch_messages(self,data):
+    # def last_10_messages():
+    #     return Message.objects.order_by('-timestamp').all()[:10]
+    def old_messages(self,data):
         pass
 
     def new_message(self,data):
 
         sender_slug = data['from']
         sender_account = Account.objects.get(slug=sender_slug)
+        # print('DATA SLUG',data['discussion_slug'])
+        current_discussion = Discussion.objects.get(slug=data['discussion_slug'])
 
         new_msg = Message.objects.create(sender=sender_account,
-                                         content = data['message'])
+                                         content = data['message'],
+                                         discussion = current_discussion)
         content = {
             'command': 'new_message',
             'message': self.msg_to_json(new_msg)
         }
+
         return content
 
     commands = {
-        'fetch_messages': fetch_messages,
+        'old_messages': old_messages,
         'new_message': new_message
     }
 

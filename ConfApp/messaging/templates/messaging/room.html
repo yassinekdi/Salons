@@ -108,6 +108,7 @@
     console.log()
     var roomName = {{ room_slug }};
     var user_slug = {{ user_slug }};
+    var discussion_slug = {{ discussion_slug }}
 
     var chatSocket = new ReconnectingWebSocket(
         'ws://' + window.location.host +
@@ -115,6 +116,7 @@
 
     chatSocket.onopen = function(e) {
         console.log("open",e)
+        // old_messages();
     };
 
     chatSocket.onmessage = function(e) {
@@ -122,7 +124,7 @@
         var data = JSON.parse(e.data);
         var message = data['message'];
 
-        console.log("message",message['message']);
+       //  console.log("message",message['message']);
         createMessage(message['message']);
     };
 
@@ -144,7 +146,8 @@
         chatSocket.send(JSON.stringify({
             'command': 'new_message',
             'message': message,
-            'from': user_slug
+            'from': user_slug,
+            'discussion_slug': discussion_slug
         }));
 
         msg_Input.value = '';
@@ -190,6 +193,11 @@
 
 
       document.querySelector('#chat-space').appendChild(div1);
+    };
+
+    function old_messages() {
+      chatSocket.send(JSON.stringify({'command': 'old_messages'}));
+
     };
 
 </script>
