@@ -1,5 +1,6 @@
 {% extends "messaging/header_messaging.html" %}
 {% block content %}
+{% load static %}
 <head>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
@@ -32,7 +33,7 @@
 
             <div class="chat_list active_chat">
               <div class="chat_people">
-                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}" alt="sunil"> </div>
                 <div class="chat_ib">
                   <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
                   <p>Test, which is a new approach to have all solutions
@@ -42,7 +43,7 @@
             </div>
             <div class="chat_list">
               <div class="chat_people">
-                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}" alt="sunil"> </div>
                 <div class="chat_ib">
                   <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
                   <p>Test, which is a new approach to have all solutions
@@ -52,7 +53,7 @@
             </div>
             <div class="chat_list">
               <div class="chat_people">
-                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}" alt="sunil"> </div>
                 <div class="chat_ib">
                   <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
                   <p>Test, which is a new approach to have all solutions
@@ -71,7 +72,7 @@
 
 
             <div class="incoming_msg">
-              <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+              <div class="incoming_msg_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}" alt="sunil"> </div>
               <div class="received_msg">
                 <div class="received_withd_msg">
                   <p>Test which is a new approach to have all
@@ -190,7 +191,7 @@
       var div4 = document.createElement('div');
 
 
-      imgTag.src = 'https://ptetutorials.com/images/user-profile.png';
+      imgTag.src = "{% static 'Attendees/Icons/user-profile.png' %}";
       div1.className = 'incoming_msg';
       div2.className = 'incoming_msg_img';
       div3.className = 'received_msg';
