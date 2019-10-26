@@ -1,11 +1,12 @@
 {% extends "Attendees/header_attendees.html" %}
 {% block content %}
-
+{% load static %}
 <div class="content">
         <div class="row">
-            {% for elt in users %}
-                <div class="col-lg-4">
-                    <div class="card">
+            {% for elt,slg in users %}
+                <div class="col-lg-4" >
+                    <div class="card"  id="form">
+
                         <div class="row pb-1">
                             <div class="col-4">
                                 {% if elt.is_organizer %}
@@ -21,6 +22,7 @@
                                 {% endif %}
                              </div>
                         </div>
+
                         <div class="row">
                             <div class="col-4">
                                 {% if elt.is_presenting %}
@@ -37,21 +39,27 @@
                                 {% else %}
                                     <div class="thumb-lg member-thumb mx-auto"><img src="{% static 'Attendees/Icons/icon_male_user.png' %}" class="rounded-circle img-thumbnail" alt="profile-image"></div>
                                 {% endif %}
-                                <div class="">
-                                    <h4>{{elt.first_name}} {{elt.last_name}}</h4>
-                                    <p class="text-muted"><b>{{elt.status}} <span>| </span><span>{{elt.organism }} </span><span>| </span><span>{{elt.country}}</span></b> </p>
-                                    <p class="text-muted">{{ elt.email }}</p>
-                                </div>
+                                    <div class="">
+                                        <h4>{{elt.first_name}} {{elt.last_name}}</h4>
+                                        <p class="text-muted"><b>{{elt.status}} | {{elt.organism }} | {{elt.country}}</b> </p>
+                                        <p class="text-muted">{{ elt.email }}</p>
+                                    </div>
                             </div>
                         </div>
+
                         <p>
-                            <div class="row pt-1">
-                                <div class="col-4"> <input type="button" id="message_btn" class="btn btn-primary mt-2 btn-rounded waves-effect w-md waves-light" value="Message"/></div>
-<!--                        <button class = "btn btn-outline-success" type="submit">Edit profile</button>-->
-                                <div class="col-4"></div>
-                                <div class="col-4"> <input type="button" id="localize_btn" class="btn btn-primary mt-2 btn-rounded waves-effect w-md waves-light" value="Localize"/></div>
-                            </div>
+
+                                <div class="row pt-1" >
+
+                                    <form action="{% url 'room' slg %}" >
+
+                                        <div class="col-4"><input type="submit" id="message_btn"  class="btn btn-primary mt-2 btn-rounded waves-effect w-md waves-light" value="Message" /> </div>
+                                    </form>
+                                    <div class="col-4"></div>
+                                    <div class="col-4"> <input type="button" id="localize_btn" class="btn btn-primary mt-2 btn-rounded waves-effect w-md waves-light" value="Localize"/></div>
+                                </div>
                         </p>
+
                         <div class="row">
                             <div class="col-4"></div>
                             <div class="col-4"><a href="{% url 'Infos_page' user.slug %}" class="text-pink">Infos</a></div>
@@ -60,26 +68,78 @@
 
                     </div>
                 </div>
+
+<!--            <script>-->
+<!--              var pTag = document.createElement('p');-->
+<!--              var div0 = document.createElement('div');-->
+<!--              var div1 = document.createElement('div');-->
+<!--              var div2 = document.createElement('div');-->
+<!--              var div3 = document.createElement('div');-->
+<!--              var input_div1 = document.createElement('input');-->
+<!--              var input_div3 = document.createElement('input');-->
+<!--              var i=4;-->
+
+<!--              var pkis = 's'.concat([{{elt.pk}}, {{user.pk}}].sort().join(''));-->
+
+<!--              console.log(pkis)-->
+
+<!--              div0.className = 'row pt-1';-->
+<!--              div1.className = 'col-'.concat(i.toString());-->
+<!--              div2.className = 'col-'.concat(i.toString());-->
+<!--              div3.className = 'col-'.concat(i.toString());-->
+
+
+
+<!--              input_div1.className = 'btn btn-primary mt-2 btn-rounded waves-effect w-md waves-light';-->
+<!--              input_div1.type = "button";-->
+<!--              input_div1.id = pkis;-->
+<!--              input_div1.value = "Message";-->
+<!--              input_div3.className = 'btn btn-primary mt-2 btn-rounded waves-effect w-md waves-light';-->
+<!--              input_div3.type = "button";-->
+<!--              input_div3.id = "localize_btn";-->
+<!--              input_div3.value = "Localize";-->
+
+
+<!--              pTag.appendChild(div0);-->
+<!--              div0.appendChild(div1);-->
+<!--              div1.appendChild(input_div1);-->
+<!--              div3.appendChild(input_div3);-->
+<!--              div0.appendChild(div2);-->
+<!--              div0.appendChild(div3);-->
+
+<!--              other_user.push({{elt.pk}});-->
+
+<!--              document.querySelector('#form').appendChild(pTag);-->
+
+<!--            </script>-->
+
             {% endfor %}
 
-        </div>
-
-    <script>
-        var discussion_slug = discussion_slug_generator(3, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-
-        document.querySelector('#message_btn').onclick = function(e) {
-        window.location.pathname = 'chat/'+discussion_slug
-        };
-
-        function discussion_slug_generator(length, chars) {
-        var result = '';
-        for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
-        return result;
-        }
 
 
+<!--    <script>-->
+<!--        var l = ['plc','lsc'];-->
 
-    </script>
+
+<!--        var discussion_slug = discussion_slug_generator(3, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');-->
+
+<!--        var buttons = document.getElementsByTagName('input');-->
+<!--        console.log(buttons[2])-->
+
+<!--        document.querySelector('#'.concat(window.pkis)).onclick = function(e) {-->
+<!--        //window.location.pathname = 'chat/'+window.pkis-->
+<!--        };-->
+
+<!--        function discussion_slug_generator(length, chars) {-->
+<!--        var result = '';-->
+<!--        for (var i = length; i > 0; &#45;&#45;i) result += chars[Math.floor(Math.random() * chars.length)];-->
+<!--        return result;-->
+<!--        }-->
+
+
+
+<!--    </script>-->
+      </div>
 </div>
 
 {% endblock %}

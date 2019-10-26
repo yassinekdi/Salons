@@ -1,0 +1,198 @@
+<script>
+                create_form(elt);
+
+                function div1(elt) {
+                  var div1 = document.createElement('div');
+                  var div11 = document.createElement('div');
+
+                  var div12 = document.createElement('div');
+                  var div13 = document.createElement('div');
+                  var span13 = document.createElement('span');
+
+                  div1.className = 'row pb-1';
+                  div11.className = 'col-4';
+
+                  {% if elt.is_organizer %}
+                    var span11 = document.createElement('span');
+                    span11.className = 'badge badge-dark';
+                    span11.textContent = 'organizer';
+                    div11.appendChild(span11);
+                  {% endif %}
+
+                  div12.className = 'col-4';
+                  div13.className = 'col-4';
+
+                  {% if elt.is_authenticated %}
+                    span13.className = 'badge badge-success';
+                    span13.textContent = 'online'
+
+                  {% else %}
+                    span13.className = 'badge badge-secondary';
+                    span13.textContent = 'offline'
+                  {% endif %}
+
+                  div1.appendChild(div11)
+                  div1.appendChild(div12)
+                  div1.appendChild(div13)
+                  div13.appendChild(span13)
+
+                return div1
+                };
+
+
+                function div2(elt) {
+                  var div2 = document.createElement('div');
+                  var div21 = document.createElement('div');
+
+                  div2.className = 'row';
+                  div21.className = 'col-4';
+                  {% if elt.is_presenting %}
+                    var span21 = document.createElement('span');
+                    span21.className = 'badge badge-dark';
+                    span21.textContent = 'speaker';
+                    div21.appendChild(span21)
+                  {% endif %}
+
+                  div2.appendChild(div21)
+
+                  return div2
+                };
+
+                function div3(data) {
+                  var div3 = document.createElement('div');
+                  var div31 = document.createElement('div');
+                  var div311 = document.createElement('div');
+                  var img311 = document.createElement('img');
+                  var div312 = document.createElement('div');
+                  var h4_312 = document.createElement('h4');
+                  var ptag32 = document.createElement('p');
+                  var b32 = document.createElement('b');
+                  // var span1_b32 = document.createElement('span');
+                  // var span2_b32 = document.createElement('span');
+                  // var span3_b32 = document.createElement('span');
+                  var ptag33 = document.createElement('p');
+
+
+
+                  div3.className = 'text-center';
+                  div31.className = 'member-card pt-2 pb-2';
+                  div311.className = 'thumb-lg member-thumb mx-auto';
+                  img311.className = 'rounded-circle img-thumbnail';
+                  img311.alt = 'profile-image';
+
+                  {% if elt.sex == "Female" %}
+                    img311.src = "{% static 'Attendees/Icons/icon_female_user.png' %}";
+                  {% else %}
+                    img311.src = "{% static 'Attendees/Icons/icon_male_user.png' %}";
+                  {% endif %}
+
+                  h4_312.textContent = {{elt.first_name}} {{elt.last_name}};
+                  ptag32.className = 'text-muted';
+                  b32.textContent =  {{elt.status}},' | ', {{elt.organism }}, ' | ', {{elt.country}};
+                  // span1_b32.textContent =  '|';
+                  // span2_b32.textContent =  {{elt.organism }};
+                  // span3_b32.textContent = {{elt.country}};
+                  ptag33.textContent = {{ elt.email }};
+
+                  div3.appendChild(div31)
+                  div31.appendChild(div311)
+                  div311.appendChild(img311)
+                  div31.appendChild(div312)
+                  div312.appendChild(h4_312)
+                  div312.appendChild(ptag32)
+                  ptag32.appendChild(b32)
+                  // b32.appendChild(span1_b32)
+                  // b32.appendChild(span3_b32)
+                  // b32.appendChild(span1_b32)
+                  // b32.appendChild(span3_b32)
+                  div312.appendChild(ptag33)
+                  return div3
+                };
+
+                function pTag(data) {
+                  var pTag = document.createElement('p');
+                  var div1 = document.createElement('div');
+                  var div12 = document.createElement('div');
+                  var div13 = document.createElement('div');
+                  var div14 = document.createElement('div');
+                  var input_div12 = document.createElement('input');
+                  var input_div14 = document.createElement('input');
+
+                  div1.className = 'row pt-1';
+                  div12.className = 'col-4';
+                  input_div12.className = 'btn btn-primary mt-2 btn-rounded waves-effect w-md waves-light';
+                  input_div12.type = "button";
+                  input_div12.id = "message_btn";
+                  input_div12.value = "Message";
+                  div13.className = 'col-4';
+                  div14.className = 'col-4';
+                  input_div14.className = 'btn btn-primary mt-2 btn-rounded waves-effect w-md waves-light';
+                  input_div14.type = "button";
+                  input_div14.id = "localize_btn";
+                  input_div14.value = "Localize";
+
+                  div1.appendChild(div12)
+                  div12.appendChild(input_div12)
+                  div1.appendChild(div13)
+                  div1.appendChild(div14)
+                  div14.appendChild(input_div14)
+
+                  return pTag
+                };
+
+
+
+                function div4(data) {
+                  var div1 = document.createElement('div');
+                  var div12 = document.createElement('div');
+                  var div13 = document.createElement('div');
+                  var div14 = document.createElement('div');
+                  var href_div13 = document.createElement('a');
+
+
+                  div1.className = 'row';
+                  div12.className = 'col-4';
+                  div13.className = 'col-4';
+                  href_div13.className = 'text-pink';
+                  href_div13.textContent = 'Infos';
+                  href_div13.href = "{% url 'Infos_page' user.slug %}";
+                  div14.className = 'col-4';
+
+                  div1.appendChild(div12)
+                  div1.appendChild(div13)
+                  div13.appendChild(href_div13)
+                  div1.appendChild(div14)
+
+                  return div1
+
+                };
+
+                function create_form(data) {
+                    var div_parent = document.createElement('div');
+                    div_parent.className = 'card';
+
+                    fdiv1 = div1(data)
+                    fdiv2 = div2(data)
+                    fdiv3 = div3(data)
+                    fptag = pTag(data)
+                    fdiv4 = div4(data)
+
+                    div_parent.appendChild(fdiv1)
+                   // div_parent.appendChild(fdiv2)
+                    // div_parent.appendChild(fdiv3)
+                    // div_parent.appendChild(fptag)
+                    // div_parent.appendChild(fdiv4)
+
+                  document.querySelector('#form').appendChild(div_parent);
+                };
+
+            </script>
+
+
+     {% if elt.pk > user.pk %}
+                                        {% set first = elt.pk %}
+                                        {% set second = user.pk %}
+                                    {% else %}
+                                        {% set first = user.pk %}
+                                        {% set second = elt.pk %}
+                                    {% endif %}

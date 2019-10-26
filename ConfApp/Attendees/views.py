@@ -17,14 +17,18 @@ def Profiles(request,slug):
     return render(request, 'Attendees/profile_page.html', context)
 
 def searchpage(request):
-
+    my_account_id = request.user.id
     if request.method=='POST':
         query = request.POST['q']
         users = Account.objects.filter(Q(last_name__icontains=query) | Q(first_name__icontains=query))
+        discussion_slug1 = [sorted([my_account_id,elt.id]) for elt in users]
+        discussion_slug2 = ['s'+''.join([str(elt[0]), str(elt[1])]) for elt in discussion_slug1]
         if len(users)>0:
-            context = {'users': users}
+            context = {'users': zip(users,discussion_slug2)}
             return render(request,'Attendees/Ids.html', context)
         else:
+            print('aaaaaaaaa')
             return HttpResponse("{} doesn't exist".format(query))
     #
     return render(request,'Attendees/Ids.html')
+

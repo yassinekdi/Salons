@@ -28,6 +28,8 @@
             </div>
           </div>
           <div class="inbox_chat">
+<!--            ------------------------------------------------------        -->
+
             <div class="chat_list active_chat">
               <div class="chat_people">
                 <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
@@ -58,8 +60,11 @@
                 </div>
               </div>
             </div>
+
+<!--            ---------------------------------------------------------    -->
           </div>
         </div>
+
 
         <div class="mesgs" >
           <div class="msg_history" id="chat-space">
@@ -106,26 +111,35 @@
     </body>
     <script>
     console.log()
-    var roomName = {{ room_slug }};
+    var discussion_slug = {{ room_slug }};
     var user_slug = {{ user_slug }};
-    var discussion_slug = {{ discussion_slug }}
 
     var chatSocket = new ReconnectingWebSocket(
         'ws://' + window.location.host +
-        '/ws/chat/' + roomName + '/');
+        '/ws/chat/' + discussion_slug + '/');
 
     chatSocket.onopen = function(e) {
         console.log("open",e)
-        // old_messages();
+
+        old_messages();
     };
 
     chatSocket.onmessage = function(e) {
 
         var data = JSON.parse(e.data);
-        var message = data['message'];
 
-       //  console.log("message",message['message']);
-        createMessage(message['message']);
+        var message = data['message']['message'];
+
+
+        if (Array.isArray(message)) {
+          message.forEach(function(e) {
+            createMessage(e);
+          });
+        }
+        else {
+          createMessage(message);
+        }
+
     };
 
     chatSocket.onclose = function(e) {
@@ -196,7 +210,8 @@
     };
 
     function old_messages() {
-      chatSocket.send(JSON.stringify({'command': 'old_messages'}));
+      chatSocket.send(JSON.stringify({'command': 'old_messages',
+                                      'discussion_slug': discussion_slug }));
 
     };
 

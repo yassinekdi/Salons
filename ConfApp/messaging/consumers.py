@@ -11,7 +11,7 @@ from django.shortcuts import get_object_or_404
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        self.room_name = self.scope['url_route']['kwargs']['room_slug']
+        self.room_name = self.scope['url_route']['kwargs']['disc_slug']
         self.room_group_name = 'chat_%s' % self.room_name
 
         await self.channel_layer.group_add(
@@ -26,6 +26,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.channel_name
         )
 
+    def many_msg_to_json(self,messages):
+        result = []
+        for msg in messages:
+            result.append(self.msg_to_json(msg))
+
+        return result
+
     def msg_to_json(self, message):
         msg_time = message.timestamp
         hour,minute,am_pm,month,day = msg_time.hour,msg_time.minute,msg_time.strftime('%p'),\
@@ -39,11 +46,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
         }
 
 
-    # def last_10_messages():
-    #     return Message.objects.order_by('-timestamp').all()[:10]
     def old_messages(self,data):
-        pass
-
+        discussion_slug = Discussion.objects.get(slug=data['discussion_slug'])
+        last_msgs = discussion_slug.messages.order_by('-timestamp').all()[:15]
+        content = {
+            'command': 'old',
+            'message': self.many_msg_to_json(last_msgs)
+        }
+        return content
     def new_message(self,data):
 
         sender_slug = data['from']
@@ -69,6 +79,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         data = json.loads(text_data)
         content = self.commands[data['command']](self,data)
+        # if len(content)>1:
+        #     print(content[0])
+                # await self.channel_layer.group_send(
+                #     self.room_group_name,
+                #     {
+                #         'type': 'chat_message',
+                #         'message': elt
+                #     }
+                # )
+        # else:
+
         await self.channel_layer.group_send(
             self.room_group_name,
             {
@@ -76,6 +97,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'message': content
             }
         )
+
 
 
     async def chat_message(self, event):
