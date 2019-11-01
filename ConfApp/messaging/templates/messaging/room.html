@@ -30,37 +30,65 @@
           </div>
           <div class="inbox_chat">
 <!--            ------------------------------------------------------        -->
+<!--                <div class="chat_list">-->
+<!--                  <div class="chat_people">-->
+<!--                    <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}" > </div>-->
+<!--                    <div class="chat_ib">-->
+<!--                      <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>-->
+<!--                      <p>Test, which is a new approach to have all solutions-->
+<!--                        astrology under one roof.</p>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="chat_list">-->
+<!--                  <div class="chat_people">-->
+<!--                    <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}" alt="sunil"> </div>-->
+<!--                    <div class="chat_ib">-->
+<!--                      <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>-->
+<!--                      <p>Test, which is a new approach to have all solutions-->
+<!--                        astrology under one roof.</p>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="chat_list active_chat">-->
+<!--                  <div class="chat_people">-->
+<!--                    <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}" alt="sunil"> </div>-->
+<!--                    <div class="chat_ib">-->
+<!--                      <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>-->
+<!--                      <p>Test, which is a new approach to have all solutions-->
+<!--                        astrology under one roof.</p>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
 
-            <div class="chat_list active_chat">
-              <div class="chat_people">
-                <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}" alt="sunil"> </div>
-                <div class="chat_ib">
-                  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                  <p>Test, which is a new approach to have all solutions
-                    astrology under one roof.</p>
-                </div>
-              </div>
-            </div>
-            <div class="chat_list">
-              <div class="chat_people">
-                <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}" alt="sunil"> </div>
-                <div class="chat_ib">
-                  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                  <p>Test, which is a new approach to have all solutions
-                    astrology under one roof.</p>
-                </div>
-              </div>
-            </div>
-            <div class="chat_list">
-              <div class="chat_people">
-                <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}" alt="sunil"> </div>
-                <div class="chat_ib">
-                  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                  <p>Test, which is a new approach to have all solutions
-                    astrology under one roof.</p>
-                </div>
-              </div>
-            </div>
+
+                   <div class="chat_list active_chat">
+                        <div class="chat_people">
+                          <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}"> </div>
+                          <div class="chat_ib">
+                            <h5>{{ other_active_name }} <span class="chat_date">{{ other_active_msg_date }}</span></h5>
+                            <p>{{ other_active_last_msg }}</p>
+                          </div>
+                        </div>
+                   </div>
+
+               {% for msg,sender,date,slg in historical_disc_data %}
+                    <a href="{% url 'room' slg %}">
+                      <div class="chat_list">
+                        <div class="chat_people">
+                          <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}"> </div>
+                          <div class="chat_ib">
+                            <h5>{{ sender }} <span class="chat_date">{{ date }}</span></h5>
+                            <p>{{ msg }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+               {% endfor %}
+
+
+<!--                                        <div class="col-4"><input type="submit" id="message_btn"  class="btn btn-primary mt-2 btn-rounded waves-effect w-md waves-light" value="Message" /> </div>-->
+
 
 <!--            ---------------------------------------------------------    -->
           </div>
@@ -69,34 +97,6 @@
 
         <div class="mesgs" >
           <div class="msg_history" id="chat-space">
-
-
-            <div class="incoming_msg">
-              <div class="incoming_msg_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}" alt="sunil"> </div>
-              <div class="received_msg">
-                <div class="received_withd_msg">
-                  <p>Test which is a new approach to have all
-                    solutions</p>
-                  <span class="time_date"> 11:01 AM    |    June 9</span></div>
-              </div>
-            </div>
-
-
-            <div class="outgoing_msg">
-              <div class="sent_msg">
-                <p>Test which is a new approach to have all
-                  solutions</p>
-                <span class="time_date"> 11:01 AM    |    June 9</span> </div>
-            </div>
-
-            <div class="outgoing_msg">
-              <div class="sent_msg">
-                <p>
-                  This is an other one
-                </p>
-                <span class="time_date">TIME </span>
-              </div>
-            </div>
 
           </div>
           <div class="type_msg">
@@ -111,11 +111,13 @@
     </div></div>
     </body>
     <script>
-    console.log()
+
     var discussion_slug = {{ room_slug }};
     var user_slug = {{ user_slug }};
+    // var list_disc_slugs = {{ list_disc_slugs }};
 
-    var chatSocket = new ReconnectingWebSocket(
+
+     var chatSocket = new ReconnectingWebSocket(
         'ws://' + window.location.host +
         '/ws/chat/' + discussion_slug + '/');
 

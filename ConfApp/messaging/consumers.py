@@ -48,7 +48,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     def old_messages(self,data):
         discussion_slug = Discussion.objects.get(slug=data['discussion_slug'])
-        last_msgs = discussion_slug.messages.order_by('-timestamp').all()[:15]
+        last_msgs = discussion_slug.messages.all()[:15]
         content = {
             'command': 'old',
             'message': self.many_msg_to_json(last_msgs)

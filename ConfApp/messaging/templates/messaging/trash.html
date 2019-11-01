@@ -222,3 +222,25 @@
 
 
 <!--    </script>-->
+
+
+   for (var slg in list_disc_slugs) {
+    document.querySelector("#".concat(list_disc_slugs[slg].toString())).onclick = function(e) {
+            var roomName = document.querySelector('#room-name-input').value;
+            window.location.pathname = '/chat/' + list_disc_slugs[slg].toString() + '/';
+        };
+        };
+
+
+
+
+
+                      <div class="chat_list active_chat">
+                        <div class="chat_people">
+                          <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}"> </div>
+                          <div class="chat_ib">
+                            <h5>blabla <span class="chat_date">date</span></h5>
+                            <p>msg</p>
+                          </div>
+                        </div>
+                      </div>
