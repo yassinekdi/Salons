@@ -232,15 +232,17 @@
         };
 
 
+        if (actual_url == wanted_url) {
+            console.log("wdw",actual_url)
+
+            chatSocket.send(JSON.stringify({
+            'command': 'notif_to_false',
+            'discussion_slug': discussion_slug,
+            'user_slug': user_slug,
+            'notification': 'read',
+            }));
+
+        }
 
 
 
-                      <div class="chat_list active_chat">
-                        <div class="chat_people">
-                          <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}"> </div>
-                          <div class="chat_ib">
-                            <h5>blabla <span class="chat_date">date</span></h5>
-                            <p>msg</p>
-                          </div>
-                        </div>
-                      </div>

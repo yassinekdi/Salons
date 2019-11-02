@@ -1,6 +1,26 @@
-{% extends "Attendees/header_attendees.html" %}
+{% extends "messaging/header_messaging.html" %}
 {% block content %}
 {% load static %}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
+<div class="row justify-content-center p-5">
+
+    <div class="srch_bar">
+        <div class="stylish-input-group">
+    <form class="form-inline" action="" method="POST">
+         {% csrf_token %}
+        <input class="search-bar" type="search" placeholder="Find me" aria-label="Search" name='q'>
+        <span class="input-group-addon">
+        <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit"><i class="fa fa-search" aria-hidden="true"></i> </button>
+        </span>
+    </form>
+        </div>
+    </div>
+
+</div>
+
+{{ Discussion.objects }}
+
 <div class="content">
         <div class="row">
             {% for elt,slg in users %}

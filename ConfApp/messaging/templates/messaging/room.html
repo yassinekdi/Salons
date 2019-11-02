@@ -1,6 +1,9 @@
 {% extends "messaging/header_messaging.html" %}
 {% block content %}
 {% load static %}
+
+
+
 <head>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
@@ -20,13 +23,13 @@
             <div class="recent_heading">
               <h4>Discussions</h4>
             </div>
-            <div class="srch_bar">
-              <div class="stylish-input-group">
-                <input type="text" class="search-bar"  placeholder="Search" >
-                <span class="input-group-addon">
-                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
-                </span> </div>
-            </div>
+<!--            <div class="srch_bar">-->
+<!--              <div class="stylish-input-group">-->
+<!--                <input type="text" class="search-bar"  placeholder="Search" >-->
+<!--                <span class="input-group-addon">-->
+<!--                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>-->
+<!--                </span> </div>-->
+<!--            </div>-->
           </div>
           <div class="inbox_chat">
 <!--            ------------------------------------------------------        -->
@@ -110,21 +113,22 @@
 
     </div></div>
     </body>
-    <script>
+
+<script>
 
     var discussion_slug = {{ room_slug }};
     var user_slug = {{ user_slug }};
     // var list_disc_slugs = {{ list_disc_slugs }};
 
 
-     var chatSocket = new ReconnectingWebSocket(
+    var chatSocket = new ReconnectingWebSocket(
         'ws://' + window.location.host +
         '/ws/chat/' + discussion_slug + '/');
 
     chatSocket.onopen = function(e) {
         console.log("open",e)
-
         old_messages();
+
     };
 
     chatSocket.onmessage = function(e) {
@@ -132,7 +136,8 @@
         var data = JSON.parse(e.data);
 
         var message = data['message']['message'];
-
+        // console.log(data['message']['notif'])
+        // console.log("onmessage", data['message']['command'])
 
         if (Array.isArray(message)) {
           message.forEach(function(e) {
@@ -141,6 +146,15 @@
         }
         else {
           createMessage(message);
+        }
+
+        if (data['message']['command']=='new_message') {
+            chatSocket.send(JSON.stringify({
+            'command': 'notif_to_false',
+            'discussion_slug': discussion_slug,
+            'notification': 'read',
+            }));
+
         }
 
     };
@@ -157,18 +171,23 @@
     };
 
     document.querySelector('#message-submit').onclick = function(e) {
+
         var msg_Input = document.querySelector('#message-input');
         var message = msg_Input.value;
-        console.log('envoi',message)
+
+        // console.log('envoi',message)
         chatSocket.send(JSON.stringify({
             'command': 'new_message',
             'message': message,
             'from': user_slug,
-            'discussion_slug': discussion_slug
-        }));
+            'discussion_slug': discussion_slug,
+            'notification': 'unread',
+            }));
 
         msg_Input.value = '';
     };
+
+
 
 
     function createMessage(data) {
@@ -217,6 +236,7 @@
                                       'discussion_slug': discussion_slug }));
 
     };
+
 
 </script>
 

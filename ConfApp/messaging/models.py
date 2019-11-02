@@ -4,7 +4,11 @@ from Account.models import Account
 
 class Discussion(models.Model):
     slug = models.SlugField(max_length=250, null=True,blank=True)
-    # participants = models.ManyToManyField(Account,related_name="discussions", blank=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return slug
 
 
 class Message(models.Model):
@@ -16,12 +20,10 @@ class Message(models.Model):
     def __str__(self):
         return self.sender.first_name + ' ' + self.sender.last_name
 
-
-
-
+class Notification(models.Model):
+    notification_user = models.ForeignKey(Account, on_delete=models.CASCADE)
+    notification_chat = models.ForeignKey(Message, on_delete=models.CASCADE)
+    notification_read = models.BooleanField(default=False)
 
     def __str__(self):
-        return "{}".format(self.pk)
-
-
-
+        return '{}'.format(self.id)

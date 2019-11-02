@@ -45,8 +45,18 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'timestamp': msg_time_str
         }
 
+    def notif_to_json(self,notif):
+        return {
+            'id': notif.id,
+            'sender': notif.notification_user.slug,
+            'content': notif.notification_disc.slug,
+            'status': notif.notification_unread
+        }
+
+
 
     def old_messages(self,data):
+
         discussion_slug = Discussion.objects.get(slug=data['discussion_slug'])
         last_msgs = discussion_slug.messages.all()[:15]
         content = {
@@ -54,57 +64,71 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'message': self.many_msg_to_json(last_msgs)
         }
         return content
+
+    def notif_to_false(self,data):
+        current_disc = Discussion.objects.get(slug=data['discussion_slug'])
+        dic_notif = {'unread': True, 'read': False}
+        current_disc.notification = dic_notif[data['notification']]
+        current_disc.save()
+
+
+        return False
+
+
     def new_message(self,data):
 
         sender_slug = data['from']
         sender_account = Account.objects.get(slug=sender_slug)
-        # print('DATA SLUG',data['discussion_slug'])
-        current_discussion = Discussion.objects.get(slug=data['discussion_slug'])
 
+
+        current_discussion = Discussion.objects.get(slug=data['discussion_slug'])
+        dic_notif = {'unread': True, 'read': False}
         new_msg = Message.objects.create(sender=sender_account,
                                          content = data['message'],
                                          discussion = current_discussion)
+
+
+        current_discussion.notification = dic_notif[data['notification']]
+
+        current_discussion.save()
         content = {
             'command': 'new_message',
-            'message': self.msg_to_json(new_msg)
+            'message': self.msg_to_json(new_msg),
+            # 'notif': self.notif_to_json(new_notif)
         }
 
         return content
 
     commands = {
         'old_messages': old_messages,
-        'new_message': new_message
+        'new_message': new_message,
+        'notif_to_false': notif_to_false
     }
 
     async def receive(self, text_data):
         data = json.loads(text_data)
-        content = self.commands[data['command']](self,data)
-        # if len(content)>1:
-        #     print(content[0])
-                # await self.channel_layer.group_send(
-                #     self.room_group_name,
-                #     {
-                #         'type': 'chat_message',
-                #         'message': elt
-                #     }
-                # )
-        # else:
 
-        await self.channel_layer.group_send(
-            self.room_group_name,
-            {
-                'type': 'chat_message',
-                'message': content
-            }
-        )
+        content = self.commands[data['command']](self,data)
+        if content != False:
+
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'chat_message',
+                    'message': content
+                }
+            )
+
 
 
 
     async def chat_message(self, event):
         content = event["message"]
 
+
         # Send message to WebSocket
         await self.send(text_data=json.dumps({
-            'message': content
+            'message': content,
+
         }))
 

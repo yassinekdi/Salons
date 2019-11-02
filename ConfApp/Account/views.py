@@ -3,8 +3,7 @@ from .forms import RegistrationForm, Login_form, EditAccountForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Account
-from django.http import HttpResponse
+
 
 # Homepage
 @login_required(login_url='login_page')

@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   {% load static %}
   {% if user.is_authenticated %}
@@ -7,15 +10,21 @@
           <ul class="navbar-nav ml-auto">
               <li class="nav-item"><a class="navbar-brand" href="{% url 'homepage' %}"><img src="{% static 'Attendees/Icons/home2.svg' %}" width="25" height="25"></a></li>
               <li class="nav-item"><a class="navbar-brand" href="#"><img src="{% static 'Attendees/Icons/notification.svg' %}" width="25" height="25"></a></li>
-              <li class="nav-item"><a class="navbar-brand" href="#"><img src="{% static 'Attendees/Icons/envelope.svg' %}" width="25" height="25"></a></li>
+<!--              <li class="nav-item" ><a class="navbar-brand" href="{% url 'room' 'last' %}" id="msg_nav"><img src="{% static 'Attendees/Icons/envelope.svg' %}" width="25" height="25"></a></li>-->
+              <li class="nav-item" ><a class="navbar-brand" href="{% url 'room' 'last' %}" id="msg_nav"><img src="{% static 'Attendees/Icons/envelope.svg' %}" width="25" height="25"><sup><span class="badge badge-info">{{ notifications_count }}</span></sup></a></li>
               <li class="nav-item"><a class="navbar-brand" href="{% url 'profile_page'%}"><img src="{% static 'Attendees/Icons/man-user.svg' %}" width="25" height="25"></a></li>
               <li class="nav-item"><a class="navbar-brand" href="{% url 'logout_page' %}"><img src="{% static 'Attendees/Icons/logout2.svg' %}" width="25" height="25"></a></li>
           </ul>
   {% else %}
           <ul class="navbar-nav ml-auto">
-              <li class="nav-item"><a class="navbar-brand" href="{% url 'login_page' %}"><img src="{% static 'Attendees/Icons/login.png' %}"></a></li>
+              <li class="nav-item"><a class="navbar-brand" href="{% url 'login_page' %}"><img src="{% static 'Attendees/Icons/login.svg' %}" width="25" height="25"></a></li>
           </ul>
   {% endif %}
 
     </div>
 </nav>
+<!-- -->
+
+<!--<sup><span class="badge badge-info">10</span></sup>-->
+
+
