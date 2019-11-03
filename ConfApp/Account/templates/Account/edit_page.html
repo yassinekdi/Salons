@@ -28,7 +28,9 @@
             {{ edit_form.status|as_crispy_field }}
         </div>
         <div class="col-4">
-            {{ edit_form.key_words|as_crispy_field }}
+<!--            {{ edit_form.key_words|as_crispy_field }}-->
+              Keywords* <i>(separated by " , ")</i>
+              <input type="key_words"  value="{{ user.key_words }}" data-role="tagsinput" name='key_words' />
         </div>
     </div>
     <div class="row">

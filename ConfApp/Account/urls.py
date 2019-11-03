@@ -24,5 +24,6 @@ urlpatterns = [
     path('register/', views.register,name='register_page'),
     path('home/', views.homepage,name='homepage'),
     path('profile/edit/', views.EditProfile, name="edit_page"),
+    path('test/', views.test, name="test"),
 
 ]

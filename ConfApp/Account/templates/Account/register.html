@@ -1,6 +1,8 @@
 {% extends "messaging/header_messaging.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+{% load static %}
+
     <form method="POST">
         {% csrf_token %}
         <div class="row">
@@ -38,27 +40,21 @@
         </div>
         <div class="row">
             <div class="col-4">
-                {{ registration_form.key_words|as_crispy_field }}
+                Keywords* <i>(separated by " , ")</i>
+               <input type="key_words"  value="tags" data-role="tagsinput" name='key_words' />
             </div>
             <div class="col-4">
                 {{ registration_form.webpage|as_crispy_field }}
             </div>
         </div>
- <!--        {% for field in registration_form %}-->
-<!--            <p>-->
-<!--                {{field.label_tag}}-->
-<!--                {{field}}-->
 
-<!--                {% for error in field.errors %}-->
-<!--                    <p style="color: red;">{{error}}</p>-->
-<!--                {% endfor %}-->
-<!--            </p>-->
-<!--        {% endfor %}-->
 
         <button class = "btn btn-outline-success" type="submit">register</button>
     </form>
     If you already have an account, <a href="{% url 'login_page' %}"><strong>login</strong> </a> instead.
 
+
 {% endblock %}
+
 
 

@@ -68,7 +68,7 @@ def EditProfile(request):
     context= {}
     user = request.user
     if request.POST:
-
+        print("REQUEST", request.POST)
         form = EditAccountForm(request.POST, instance=user, initial={'fname':user.first_name})
         if form.is_valid():
             form.save()
@@ -77,8 +77,11 @@ def EditProfile(request):
             account = authenticate(email=email,password=raw_password)
             messages.success(request,'Account Updated!')
             # login(request,account)
+            print("VAAALIIID")
             return redirect('profile_page')
+
         else:
+            print("NOOOT VAAALIIID")
             context['edit_form'] = form
             messages.error(request,'')
             return redirect('homepage')
@@ -90,3 +93,6 @@ def EditProfile(request):
 # Website page
 def conf_website(request):
     return render(request,'Account/Conference_site.html')
+
+def test(request):
+    return render(request,'Account/test.html')

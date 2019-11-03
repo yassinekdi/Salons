@@ -3,9 +3,9 @@ from django import forms
 from django.contrib.auth import authenticate
 from .models import Account
 
+
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(max_length=60)
-
     class Meta:
         model = Account
         fields = ('email', 'password1','password2','first_name','last_name','status','organism','key_words','webpage',
@@ -31,5 +31,5 @@ class EditAccountForm(UserChangeForm):
 
     class Meta:
         model = Account
-        fields = ('email','first_name','last_name','status','organism','key_words', 'webpage', 'country', 'sex')
+        fields = ('first_name','last_name','email','webpage','organism','status','key_words')
 
