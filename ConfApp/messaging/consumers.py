@@ -1,5 +1,5 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
-from .models import Message, Discussion
+from .models import Message, Discussion, Notification
 from Account.models import Account
 import json
 from django.shortcuts import get_object_or_404
@@ -45,13 +45,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'timestamp': msg_time_str
         }
 
-    def notif_to_json(self,notif):
-        return {
-            'id': notif.id,
-            'sender': notif.notification_user.slug,
-            'content': notif.notification_disc.slug,
-            'status': notif.notification_unread
-        }
+
 
 
 
@@ -65,14 +59,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         }
         return content
 
-    def notif_to_false(self,data):
-        current_disc = Discussion.objects.get(slug=data['discussion_slug'])
-        dic_notif = {'unread': True, 'read': False}
-        current_disc.notification = dic_notif[data['notification']]
-        current_disc.save()
-
-
-        return False
 
 
     def new_message(self,data):
@@ -80,44 +66,57 @@ class ChatConsumer(AsyncWebsocketConsumer):
         sender_slug = data['from']
         sender_account = Account.objects.get(slug=sender_slug)
 
-
         current_discussion = Discussion.objects.get(slug=data['discussion_slug'])
-        dic_notif = {'unread': True, 'read': False}
+        receiver = [int(elt) for elt in data['discussion_slug'].split('n')[1:] if int(elt) != sender_account.id][0]
+        receiver_account = Account.objects.get(id=receiver)
+
+
         new_msg = Message.objects.create(sender=sender_account,
                                          content = data['message'],
                                          discussion = current_discussion)
 
 
-        current_discussion.notification = dic_notif[data['notification']]
+        notification_sender = Notification.objects.get_or_create(notif_user=sender_account,
+                                                                 notif_discussion=data['discussion_slug'],)[0]
+        notification_sender.notif_read = True
+        notification_sender.save()
+        # print('NOTIF SENDER ID', notification_sender.id)
+        # print('NOTIF SENDER READ', notification_sender.notif_read)
+        # Can be done using signals: Creating notification after creating msgs
+        notification_receiver = Notification.objects.get_or_create(notif_user=receiver_account,
+                                                          notif_discussion=data['discussion_slug'])[0]
+        notification_receiver.notif_read=False
+        notification_receiver.save()
+        print('NOTIF RECEIVER ID', notification_receiver.id)
 
-        current_discussion.save()
+
         content = {
             'command': 'new_message',
             'message': self.msg_to_json(new_msg),
-            # 'notif': self.notif_to_json(new_notif)
+            #'notif': self.notif_to_json(notification_receiver)
         }
+
 
         return content
 
     commands = {
         'old_messages': old_messages,
         'new_message': new_message,
-        'notif_to_false': notif_to_false
+        #'notif_to_false': notif_to_false
     }
 
     async def receive(self, text_data):
         data = json.loads(text_data)
-
+        print('DATA COMMAND: ', data['command'])
         content = self.commands[data['command']](self,data)
-        if content != False:
 
-            await self.channel_layer.group_send(
-                self.room_group_name,
-                {
-                    'type': 'chat_message',
-                    'message': content
-                }
-            )
+        await self.channel_layer.group_send(
+            self.room_group_name,
+            {
+                'type': 'chat_message',
+                'message': content
+            }
+        )
 
 
 

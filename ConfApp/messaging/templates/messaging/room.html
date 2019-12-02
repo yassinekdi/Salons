@@ -32,39 +32,6 @@
 <!--            </div>-->
           </div>
           <div class="inbox_chat">
-<!--            ------------------------------------------------------        -->
-<!--                <div class="chat_list">-->
-<!--                  <div class="chat_people">-->
-<!--                    <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}" > </div>-->
-<!--                    <div class="chat_ib">-->
-<!--                      <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>-->
-<!--                      <p>Test, which is a new approach to have all solutions-->
-<!--                        astrology under one roof.</p>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                <div class="chat_list">-->
-<!--                  <div class="chat_people">-->
-<!--                    <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}" alt="sunil"> </div>-->
-<!--                    <div class="chat_ib">-->
-<!--                      <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>-->
-<!--                      <p>Test, which is a new approach to have all solutions-->
-<!--                        astrology under one roof.</p>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                <div class="chat_list active_chat">-->
-<!--                  <div class="chat_people">-->
-<!--                    <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}" alt="sunil"> </div>-->
-<!--                    <div class="chat_ib">-->
-<!--                      <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>-->
-<!--                      <p>Test, which is a new approach to have all solutions-->
-<!--                        astrology under one roof.</p>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-
-
                    <div class="chat_list active_chat">
                         <div class="chat_people">
                           <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}"> </div>
@@ -137,7 +104,7 @@
 
         var message = data['message']['message'];
         // console.log(data['message']['notif'])
-        // console.log("onmessage", data['message']['command'])
+         console.log("message received")
 
         if (Array.isArray(message)) {
           message.forEach(function(e) {
@@ -148,14 +115,7 @@
           createMessage(message);
         }
 
-        if (data['message']['command']=='new_message') {
-            chatSocket.send(JSON.stringify({
-            'command': 'notif_to_false',
-            'discussion_slug': discussion_slug,
-            'notification': 'read',
-            }));
 
-        }
 
     };
 
@@ -175,7 +135,7 @@
         var msg_Input = document.querySelector('#message-input');
         var message = msg_Input.value;
 
-        // console.log('envoi',message)
+        console.log('message sent by', user_slug)
         chatSocket.send(JSON.stringify({
             'command': 'new_message',
             'message': message,

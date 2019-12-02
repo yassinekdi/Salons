@@ -8,7 +8,7 @@ class Discussion(models.Model):
 
 
     def __str__(self):
-        return slug
+        return self.slug
 
 
 class Message(models.Model):
@@ -21,9 +21,9 @@ class Message(models.Model):
         return self.sender.first_name + ' ' + self.sender.last_name
 
 class Notification(models.Model):
-    notification_user = models.ForeignKey(Account, on_delete=models.CASCADE)
-    notification_chat = models.ForeignKey(Message, on_delete=models.CASCADE)
-    notification_read = models.BooleanField(default=False)
+    notif_user = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='notification')
+    notif_discussion = models.CharField(max_length=50, null=True)
+    notif_read = models.BooleanField(default=False)
 
     def __str__(self):
         return '{}'.format(self.id)

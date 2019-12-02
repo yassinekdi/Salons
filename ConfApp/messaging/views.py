@@ -15,7 +15,7 @@ def room(request,disc_slug='last'):
 
     # FOR ACTIVE OTHER USER : other active user infos
     this_disc = Discussion.objects.get_or_create(slug= disc_slug)[0]
-    tst=[int(elt) for elt in list(disc_slug)[1:] if int(elt)!=request.user.id][0]
+    tst=[int(elt) for elt in disc_slug.split('n')[1:] if int(elt)!=request.user.id][0]
     other_user_active = Account.objects.get(id=tst)
 
     ln_msgs = len(this_disc.messages.all())-1

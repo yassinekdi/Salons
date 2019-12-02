@@ -41,7 +41,7 @@ class Account(AbstractUser):
     status = models.CharField(verbose_name="Status", max_length=20, choices=Status_choice)
     webpage = models.CharField(verbose_name="Webpage", max_length=50, default="LinkedIn, Researchgate, blog..")
     organism = models.CharField(verbose_name="Organism", max_length=50, default="University/Institute/Company..")
-    key_words = models.CharField(verbose_name="Key words", max_length=50, default="Keywords")
+    key_words = models.CharField(verbose_name="Key words", max_length=250, default="Keywords")
     first_name = models.CharField(verbose_name="First name", max_length=20, default="")
     last_name = models.CharField(verbose_name="Last name", max_length=20, default="")
     is_chair = models.BooleanField(verbose_name='Chair',default=False)

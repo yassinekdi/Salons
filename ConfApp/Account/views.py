@@ -68,7 +68,7 @@ def EditProfile(request):
     context= {}
     user = request.user
     if request.POST:
-        print("REQUEST", request.POST)
+        # print("REQUEST", request.POST)
         form = EditAccountForm(request.POST, instance=user, initial={'fname':user.first_name})
         if form.is_valid():
             form.save()

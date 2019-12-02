@@ -22,8 +22,8 @@ def searchpage(request):
         query = request.POST['q']
         users = Account.objects.filter(Q(last_name__icontains=query) | Q(first_name__icontains=query))
         discussion_slug1 = [sorted([my_account_id,elt.id]) for elt in users]
-        discussion_slug2 = ['s'+''.join([str(elt[0]), str(elt[1])]) for elt in discussion_slug1]
-        # other_user_slug = [elt.id for elt in users]
+        # discussion_slug2 = ['s'+''.join([str(elt[0]), str(elt[1])]) for elt in discussion_slug1]
+        discussion_slug2 = ['n'+str(elt[0])+'n'+ str(elt[1]) for elt in discussion_slug1]
 
         if len(users)>0:
             context = {'users': zip(users,discussion_slug2)}

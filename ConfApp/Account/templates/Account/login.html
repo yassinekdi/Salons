@@ -1,25 +1,72 @@
 {% extends "messaging/header_messaging.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+{% load static %}
 
-<div class="row justify-content-center p-5">
-    <div class="col-4">
-        <div class="card">
-            <div class="card-body">
-                <form method="POST" novalidate>
+<link rel="stylesheet" href="{% static 'Account/style2.css' %}" type="text/css">
+
+<!--<div class="row justify-content-center p-5">-->
+<!--    <div class="col-4">-->
+<!--        <div class="card text-white bg-dark mb-3">-->
+<!--            <div class="card-body">-->
+
+<!--                <form method="POST" novalidate>-->
+<!--                    {% csrf_token %}-->
+<!--                    <div class="srch_bar">-->
+<!--                         <div class="stylish-input-group">-->
+<!--                    <input class="search-bar" value="Email" type="email" name='email' />-->
+<!--                                        </div>-->
+<!--    </div>-->
+<!--                                        <div class="srch_bar">-->
+<!--                         <div class="stylish-input-group">-->
+<!--                                <input class="search-bar"  type="password" name="password">-->
+<!--                                                   </div>-->
+<!--    </div>-->
+
+<!--                    <button class = "btn btn-outline-success" type="submit">Log in</button>-->
+<!--                    <a href="#" class="btn btn-link"><strong>Forgot your password?</strong> </a>-->
+<!--                </form>-->
+
+
+<!--        If you already have an account: <a href="{% url 'register_page' %}"><strong>Register.</strong></a>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--    </div>-->
+<!--</div>-->
+
+
+
+    <form method="POST" novalidate>
+        <div class="row justify-content-center p-1">
                     {% csrf_token %}
-                    {{ login_form|crispy }}
-
-                    <button class = "btn btn-outline-success" type="submit">Log in</button>
-                    <a href="#" class="btn btn-link"><strong>Forgot your password?</strong> </a>
-                </form>
-        If you already have an account: <a href="{% url 'register_page' %}"><strong>Register.</strong></a>
-            </div>
+         <div class="form">
+            <input type="email" name="email" required />
+                <label for="name" class="label-name">
+                    <span class="content-name">Email</span>
+                </label>
+         </div>
         </div>
+    <div class="row justify-content-center p-1 ">
 
-    </div>
+    <div class="form">
+    <input type="password" name="password" required />
+    <label for="name" class="label-name">
+        <span class="content-name">Password</span>
+    </label>
 </div>
+    </div>
+    <div class="row justify-content-center pl-5 ml-5">
 
+        <button class = "btn btn-outline-success float-right" type="submit">Log in</button>
+    </div>
+</form>
 
+<div class="row justify-content-center pl-5 ml-5">
 
+If you already have an account: <a href="{% url 'register_page' %}"><strong>Register.</strong></a>
+</div>
 {% endblock %}
+
+
+

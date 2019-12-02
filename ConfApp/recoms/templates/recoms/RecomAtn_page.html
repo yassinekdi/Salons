@@ -1,0 +1,76 @@
+{% extends "messaging/header_messaging.html" %}
+{% block content %}
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'recoms/styles.css' %}" />
+</head>
+<div class="row">
+    <div class="col-3">
+
+  <div class="card-body">
+
+
+<ul class="list-group">
+    <a href="{% url 'recoms_sess' %}" class="list-group-item list-group-item-action">
+        <img src="{% static 'Attendees/Icons/presentation.svg' %}" width="20" height="20"> Sessions
+        <span class="badge badge-primary badge-pill text-left">14</span>
+    </a>
+    <a href="{% url 'recoms_atn' %}" class="list-group-item list-group-item-action list-group-item-dark">
+        <img src="{% static 'Attendees/Icons/attendees2.svg' %}" width="20" height="20"> Attendees
+        <span class="badge badge-primary badge-pill">15</span>
+    </a>
+    <a href="#" class="list-group-item list-group-item-action">
+        <img src="{% static 'Attendees/Icons/document.svg' %}" width="20" height="20"> Papers
+        <span class="badge badge-primary badge-pill">20</span>
+    </a>
+
+</ul>
+  </div>
+
+        </div>
+    <div class="col-9">
+
+    {% for user in users %}
+
+        <div class="card bg-light mb-3 mt-3 text-left" style="max-width: 40rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ user.first_name }}  {{ user.last_name }}</h5>
+                <p class="card-text">Organism: {{ user.organism }}</p>
+                <p class="card-text">Keywords: <span class="badge badge-secondary">{{ user.key_words }}</span></p>
+<!--                            <p class="card-text">Keywords:-->
+<!--                    {% for kw in  user.key_words %}-->
+<!--                    <span class="badge badge-secondary">{{ kw }}</span>-->
+<!--                    {% endfor %}-->
+                <p class="card-text">statues</p>
+                <a href="#" class="btn btn-primary">Message</a>
+            </div>
+        </div>
+    {% endfor %}
+
+
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a class="btn btn-outline-dark mb-4 " href="?page=1">First</a>
+            <a class="btn btn-outline-dark mb-4 " href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a class="btn btn-dark mb-4 " href="?page={{ num }}">{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a class="btn btn-outline-dark mb-4 " href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+    {% if page_obj.has_next %}
+            <a class="btn btn-outline-dark mb-4 " href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a class="btn btn-outline-dark mb-4 " href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+    {% endif %}
+
+</div>
+
+
+</div>
+
+{% endblock %}
