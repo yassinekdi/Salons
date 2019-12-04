@@ -2,9 +2,9 @@ from django.db import models
 from ConfApp.utils import unique_slug_generator
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db.models.signals import pre_save
-from django.utils.text import slugify
-# For creating a custom User *******************
-
+from django.db.models.signals import post_save
+from recoms.functions import *
+from tagging.models import Tag
 
 class MyAccountManager(BaseUserManager):
 
@@ -74,3 +74,27 @@ def slug_generator(sender, instance, *args, **kwargs):
 #
 #
 pre_save.connect(slug_generator,sender=Account)
+
+
+
+def add_tag(sender,instance,**kwargs):
+
+    # transforming + cleaning keywords + adding tags
+    sender_k = instance.key_words
+
+    if len(sender_k)>0:
+
+        Tag.objects.update_tags(instance, None)
+        sender_k2 = sender_k.split(',')
+        sender_k3 = []
+        for elt in sender_k2:
+            if len(elt.split(' '))>1:
+                elt2 = elt.split(' ')
+                sender_k3.append('-'.join(elt2))
+            else:
+                sender_k3.append(elt)
+
+        add_tags = [Tag.objects.add_tag(instance, word) for word in sender_k3]
+
+
+post_save.connect(add_tag,sender=Account)

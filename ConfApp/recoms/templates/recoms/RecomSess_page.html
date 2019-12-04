@@ -6,62 +6,63 @@
 </head>
 <div class="row">
     <div class="col-3">
-
-  <div class="card-body">
-
-
-<ul class="list-group">
-    <a href="{% url 'recoms_sess' %}" class="list-group-item list-group-item-action list-group-item-dark ">
-        <img src="{% static 'Attendees/Icons/presentation.svg' %}" width="20" height="20"> Sessions
-    </a>
-    <a href="{% url 'recoms_atn' %}" class="list-group-item list-group-item-action">
-        <img src="{% static 'Attendees/Icons/attendees2.svg' %}" width="20" height="20"> Attendees
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">
-        <img src="{% static 'Attendees/Icons/document.svg' %}" width="20" height="20"> Papers
-    </a>
-
-</ul>
-  </div>
-
+        <div class="card-body">
+            <ul class="list-group">
+                <a href="{% url 'recoms_sess' %}" class="list-group-item list-group-item-action list-group-item-dark ">
+                    <img src="{% static 'Attendees/Icons/presentation.svg' %}" width="20" height="20"> Sessions
+                </a>
+                <a href="{% url 'recoms_atn' %}" class="list-group-item list-group-item-action">
+                    <img src="{% static 'Attendees/Icons/attendees2.svg' %}" width="20" height="20"> Attendees
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <img src="{% static 'Attendees/Icons/document.svg' %}" width="20" height="20"> Papers
+                </a>
+            </ul>
         </div>
+    </div>
+
     <div class="col-9">
-
-    {% for sess in sessions %}
-
-        <div class="card bg-light mb-3 mt-3 text-left" style="max-width: 40rem;">
-            <div class="card-body">
-                <h5 class="card-title">{{ sess.title }}</h5>
-                <p class="card-text">{{ sess.authors }}</p>
-                <p class="card-text text-right"><img src="{% static 'Attendees/Icons/calendar.svg' %}" width="20" height="20"> {{ sess.timestamp }}
-                <a href="#" class="btn btn-outline-dark btn-sm">Reminder</a></p>
+        {% for sess in sessions %}
+            <div class="card bg-light mb-3 mt-3 text-left" style="max-width: 40rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ sess.title }}</h5>
+                    <p class="card-text">{{ sess.authors }}</p>
+                    <p class="card-text text-right">
+                        <img src="{% static 'Attendees/Icons/calendar.svg' %}" width="20" height="20">
+                        {{ sess.timestamp }}
+                        <a href="#" class="btn btn-outline-dark btn-sm">Reminder</a>
+                    </p>
+                </div>
             </div>
-        </div>
-    {% endfor %}
-
-    {% if is_paginated %}
-        {% if page_obj.has_previous %}
-            <a class="btn btn-outline-dark mb-4 " href="?page=1">First</a>
-            <a class="btn btn-outline-dark mb-4 " href="?page={{ page_obj.previous_page_number }}">Previous</a>
-        {% endif %}
-
-        {% for num in page_obj.paginator.page_range %}
-            {% if page_obj.number == num %}
-                <a class="btn btn-dark mb-4 " href="?page={{ num }}">{{ num }}</a>
-            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                <a class="btn btn-outline-dark mb-4 " href="?page={{ num }}">{{ num }}</a>
-            {% endif %}
         {% endfor %}
+    </div>
+</div>
 
-    {% if page_obj.has_next %}
-            <a class="btn btn-outline-dark mb-4 " href="?page={{ page_obj.next_page_number }}">Next</a>
-            <a class="btn btn-outline-dark mb-4 " href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-        {% endif %}
-    {% endif %}
+<div class="row">
+        <div class="col-4"></div>
+        <div class="col">
+            {% if is_paginated %}
+                {% if page_obj.has_previous %}
+                    <a class="btn btn-outline-dark mb-4 " href="?page=1">First</a>
+                    <a class="btn btn-outline-dark mb-4 " href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <a class="btn btn-dark mb-4 " href="?page={{ num }}">{{ num }}</a>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <a class="btn btn-outline-dark mb-4 " href="?page={{ num }}">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <a class="btn btn-outline-dark mb-4 " href="?page={{ page_obj.next_page_number }}">Next</a>
+                    <a class="btn btn-outline-dark mb-4 " href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                {% endif %}
+            {% endif %}
+        </div>
 
 </div>
 
-
-</div>
 
 {% endblock %}

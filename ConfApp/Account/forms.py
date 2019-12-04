@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 from django.contrib.auth import authenticate
 from .models import Account
-
+from tagging.fields import TagField
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(max_length=60)
@@ -28,7 +28,7 @@ class Login_form(forms.ModelForm):
 
 
 class EditAccountForm(UserChangeForm):
-
+    key_words= TagField(max_length=200)
     class Meta:
         model = Account
         fields = ('first_name','last_name','email','webpage','organism','status','key_words')

@@ -1,0 +1,28 @@
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+
+.thumb-lg {
+    height: 88px;
+    width: 88px;
+}
+
+.card {
+    padding: 5px;
+    border-radius: 3px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: #fff;
+}
+.text-pink {
+    color: #ff679b!important;
+}
+.btn-rounded {
+    border-radius: 2em;
+}
+.text-muted {
+    color: #98a6ad!important;
+}

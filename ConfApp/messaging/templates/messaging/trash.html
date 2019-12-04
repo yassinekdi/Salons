@@ -225,26 +225,28 @@
 
 <!--    </script>-->
 
+<div class="row">
+        <div class="col-4"></div>
+        <div class="col">
+            {% if is_paginated %}
+                {% if minis.has_previous %}
+                    <a class="btn btn-outline-dark mb-4 " href="{% url 'recoms_atn' %}">First</a>
+                    <a class="btn btn-outline-dark mb-4 " href="{% url 'recoms_atn' minis.previous_page_number %}">Previous</a>
+                {% endif %}
 
-   for (var slg in list_disc_slugs) {
-    document.querySelector("#".concat(list_disc_slugs[slg].toString())).onclick = function(e) {
-            var roomName = document.querySelector('#room-name-input').value;
-            window.location.pathname = '/chat/' + list_disc_slugs[slg].toString() + '/';
-        };
-        };
+                {% for num in minis.paginator.page_range %}
+                    {% if minis.number == num %}
+                        <a class="btn btn-dark mb-4 " href="{% url 'recoms_atn' num %}">{{ num }}</a>
+                    {% elif num > minis.number|add:'-3' and num < minis.number|add:'3' %}
+                        <a class="btn btn-outline-dark mb-4 " href="{% url 'recoms_atn' num %}">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
 
+                {% if minis.has_next %}
+                        <a class="btn btn-outline-dark mb-4 " href="{% url 'recoms_atn' minis.next_page_number %}">Next</a>
+                        <a class="btn btn-outline-dark mb-4 " href="{% url 'recoms_atn' minis.paginator.num_pages %}">Last</a>
+                {% endif %}
+            {% endif %}
+        </div>
 
-        if (actual_url == wanted_url) {
-            console.log("wdw",actual_url)
-
-            chatSocket.send(JSON.stringify({
-            'command': 'notif_to_false',
-            'discussion_slug': discussion_slug,
-            'user_slug': user_slug,
-            'notification': 'read',
-            }));
-
-        }
-
-
-
+</div>

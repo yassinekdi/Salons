@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'tagging',
     'recoms',
     'Attendees.apps.AttendeesConfig',
     'crispy_forms',
