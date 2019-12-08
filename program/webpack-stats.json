@@ -1,1 +1,1 @@
-{"status":"done","publicPath":"http://localhost:8080/dist/","chunks":{"main":[{"name":"build.js","publicPath":"http://localhost:8080/dist/build.js","path":"C:\\Users\\Cyala\\PycharmProjects\\ConfApp4\\Recommendation_branch\\Salons\\program\\dist\\build.js"}]}}
+{"status":"done","publicPath":"http://127.0.0.1:8080/","chunks":{"app":[{"name":"js/app.js","publicPath":"http://127.0.0.1:8080/js/app.js","path":"C:\\Users\\Cyala\\PycharmProjects\\ConfApp4\\Recommendation_branch\\Salons\\program\\dist\\js\\app.js"}]}}
