@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'webpack_loader',
+    'Calendar',
     'tagging',
     'recoms',
     'Attendees.apps.AttendeesConfig',
@@ -62,7 +64,7 @@ ROOT_URLCONF = 'ConfApp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -136,5 +138,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Webpack loader
+WEBPACK_LOADER = {
+    'DEFAULT' : {
+        'CACHE' : not DEBUG,
+        'BUNDLE_DIR_NAME': '',  # must end with slash
+        'STATS_FILE': os.path.join(BASE_DIR, '../program/webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    }
+}
+
+
 AUTH_USER_MODEL = 'Account.Account'
 
+print('BASE DIR IS ', BASE_DIR)

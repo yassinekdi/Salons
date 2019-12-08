@@ -15,11 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView
 
 urlpatterns = [
+    path('calendar/', include('Calendar.urls')),
     path('recoms/', include('recoms.urls')),
     path('chat/',include('messaging.urls')),
     path('', include('Attendees.urls')),
     path('', include('Account.urls')),
     path('admin/', admin.site.urls),
+    path('vuejs/', TemplateView.as_view(template_name='index.html'))
 ]

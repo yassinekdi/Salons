@@ -1,0 +1,95 @@
+{% extends "messaging/header_messaging.html" %}
+
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'Calendar/style2.css' %}" />
+
+<ul class="nav nav-pills mt-4" id="pills-tab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active bg-dark" id="day1" data-toggle="pill" href="#table_day1" role="tab" aria-controls="table_day1" aria-selected="true">Day1</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="day2" data-toggle="pill" href="#table_day2" role="tab" aria-controls="table_day2" aria-selected="false">Day2</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="day3" data-toggle="pill" href="#table_day3" role="tab" aria-controls="table_day3" aria-selected="false">Day3</a>
+  </li>
+
+</ul>
+
+
+<!--  <nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+<!--    text-->
+<!--  </nav>-->
+<div class="row">
+	<div class="col-2 band"></div>
+	<div class="col-10 band">
+		<div class="d-flex justify-content-between ">
+		  <div class="pl bd-highlight">9:00</div>
+		  <div class="pl-5 bd-highlight">9:15</div>
+		  <div class="pl-5 bd-highlight">9:30</div>
+		  <div class="pl-5 bd-highlight">9:45</div>
+		  <div class="pl-5 bd-highlight">10:00</div>
+		  <div class="pl-5 bd-highlight">10:15</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-2">
+		<div class="d-flex flex-column bd-highlight">
+
+		  <div class="p-2 bd-highlight border border-secondary border-bottom-0">THEME A: Modelling Techniques and Prototype Data
+			<p class="text-right text-center mb-0">
+				  <img src="{% static 'Attendees/Icons/location.svg' %}" width="15" height="15">
+				  <small><b>Panama</b></small>
+			</p>
+		  </div>
+
+		  <div class="p-2 bd-highlight border border-secondary border-bottom-0">THEME B: Coastal Hydrodynamics and Morphology
+			<p class="text-right text-center mb-0">
+				  <img src="{% static 'Attendees/Icons/location.svg' %}" width="15" height="15">
+				  <small><b>Barcelona 4</b></small>
+			</p>
+		  </div>
+
+		  <div class="p-2 bd-highlight border border-secondary">THEME C: Surface Water and Groundwater Hydrology
+		  	<p class="text-right text-center mb-0">
+				  <img src="{% static 'Attendees/Icons/location.svg' %}" width="15" height="15">
+				  <small><b>Madrid Hall</b></small>
+			</p>
+		  </div>
+		</div>
+	</div>
+
+	<div class="col-10">
+
+
+			<div class="card mt-2" style="width: 13rem;">
+
+    				Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate Simulation Data
+
+			</div>
+
+
+
+	</div>
+</div>
+
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="table_day1" role="tabpanel" aria-labelledby="day1">text day1</div>
+  <div class="tab-pane fade" id="table_day2" role="tabpanel" aria-labelledby="day2">text day 2</div>
+  <div class="tab-pane fade" id="table_day3" role="tabpanel" aria-labelledby="day3">text day 3</div>
+</div>
+
+<span class="border border-primary">qsdqsd</span>
+<span class="border border-secondary">qsdqsd</span>
+<span class="border border-success">qsdqs</span>
+<span class="border border-danger">qsdfsdf</span>
+<span class="border border-warning">fsdfdsf</span>
+<span class="border border-info">sdfsdf</span>
+<span class="border border-light">sdfsdf</span>
+<span class="border border-dark rounded-pill">sdfsdfsd</span>
+
+
+{% endblock %}
