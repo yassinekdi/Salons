@@ -1,5 +1,10 @@
-<!DOCTYPE html>
+{% extends "messaging/header_messaging.html" %}
+
+{% block content %}
+{% load static %}
+
 <html lang="en">
+
 {% load render_bundle from webpack_loader %}
 <head>
 
@@ -7,8 +12,42 @@
     <title>Title</title>
 </head>
 <body>
-<div id="app"></div>
+<div id="app">
+    <app></app>
+</div>
 
-{% render_bundle 'main' %}
+{% render_bundle 'app' %}
 </body>
 </html>
+
+
+{% endblock %}
+
+
+
+<!--{% extends "messaging/header_messaging.html" %}-->
+
+<!--{% block content %}-->
+<!--{% load static %}-->
+
+
+
+<!--<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>-->
+
+<!--<div id="app">-->
+<!--    <p> [[ title ]] </p>-->
+<!--    aaaaa-->
+<!--</div>-->
+
+<!--<script>-->
+<!--new Vue({-->
+<!--  delimiters: ['[[', ']]'],-->
+<!--  el: '#app',-->
+<!--  data: {-->
+<!--    title: 'Welcome to My Journal'-->
+<!--  }-->
+<!--})-->
+<!--</script>-->
+
+
+<!--{% endblock %}-->

@@ -12,6 +12,7 @@
 
           <ul class="navbar-nav ml-auto">
               <li class="nav-item"><a class="navbar-brand" href="{% url 'homepage' %}"><img src="{% static 'Attendees/Icons/home2.svg' %}" width="25" height="25"></a></li>
+              <li class="nav-item"><a class="navbar-brand" href="#"><img src="{% static 'Attendees/Icons/agenda.svg' %}" width="25" height="25"></a></li>
               <li class="nav-item"><a class="navbar-brand" href="#"><img src="{% static 'Attendees/Icons/notification.svg' %}" width="25" height="25"></a></li>
 <!--              <li class="nav-item" ><a class="navbar-brand" href="{% url 'room' 'last' %}" id="msg_nav"><img src="{% static 'Attendees/Icons/envelope.svg' %}" width="25" height="25"></a></li>-->
               <li class="nav-item" ><a class="navbar-brand" href="{% url 'room' 'last' %}" id="msg_nav"><img src="{% static 'Attendees/Icons/envelope.svg' %}" width="25" height="25"><sup><span class="badge badge-info">{{ notifications_count }}</span></sup></a></li>

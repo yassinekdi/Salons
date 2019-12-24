@@ -3,34 +3,140 @@
 {% block content %}
 {% load static %}
 
-<head>
-    <meta charset="utf-8">
-    <title></title>
 
-<link rel="stylesheet" href="{% static 'Calendar/style4.css' %}" />
-  </head>
 
+<style media="screen">
+#app {
+text-align: center;
+font-size: 20px;
+}
+
+.left{
+float: left;
+width: 30%;
+height: 200px;
+border: 1px solid black;
+}
+
+.center{
+float: left;
+width: 100%;
+height: 600px;
+border: 1px solid black;
+margin: 1px;
+overflow: hidden;
+white-space: nowrap;
+transform: scale(.98);
+}
+
+.center.active {
+  background: rgba(255,255,255,0.3);
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+  tranform: scale(1);
+}
+
+.right{
+float: right;
+width: 30%;
+height: 200px;
+border: 1px solid black;
+}
+
+table {
+
+  table-layout: fixed;
+  width: 100px;
+}
+
+th,
+td {
+  width: 100px;
+  overflow: hidden;
+}
+
+th:first-child, td:first-child
+{
+  position:sticky;
+  left:0px;
+
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}
+
+
+</style>
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">-->
+
+ <button type="button" class="btn btn-outline-dark btn-sm mb-3" data-toggle="modal" data-target=".bd-example-modal-lg">
+                              More ...
+                            </button>
+
+                              <!-- Modal -->
+                       <div class="modal fade bd-example-modal-lg" role="dialog">
+                         <div class="modal-dialog modal-lg">
+                           <div class="modal-content">
+            <!--                                    ---------------------- content   -->
+                                   <div class="row no-gutters">
+                                       <div class="col-md-2">
+                                           <div class="thumb-lg member-thumb ml-3 mt-3">
+                                              blablabla
+                                           </div>
+                                       </div>
+                                       <div class="col-md-10 mt-3">
+
+                                               <h5>blablabla</h5>
+                                               <p class="text-muted"><small><b>blablabla </b></small> </p>
+                                               <p class="text-muted"><small><b>blablabla </b></small> </p>
+
+                                               <p class="text-muted"><small><b>Webpages: </b></small> </p>
+                                               <p class="text-right mr-3">
+                                                   <button type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal">Close</button>
+                                               </p>
+
+                                       </div>
+                                   </div>
+            <!--                                    ---------------------- content  -->
+                           </div>
+                         </div>
+                       </div>
 
 
     <div id="app" class="mt-4">
       <tabs>
         <tab name= "Monday" :selected="true">
-<!--            MONDAY CONTENT ------------------------------------------------------------------------ -->
-         <div class = "center" id="content" ref="content">
-          <table class="table">
-            <thead>
-            <col width="250">
-            <col width="300">
-            <col width="300">
-            <col width="300">
-            <col width="300">
-            <col width="300">
-            <col width="300">
-            <col width="300">
-            <col width="300">
 
+<table class="table">
+            <thead>
+            <col width="200">
+            <col width="400">
+            <col width="400">
+            <col width="400">
+            <col width="400">
+            <col width="400">
+            <col width="400">
+            <col width="400">
+            <col width="400">
               <tr>
+
                 <th class="text-light bg-dark"></th>
+                <th class="text-light bg-dark">9:00  </th>
+                <th class="text-light bg-dark">9:15</th>
+                <th class="text-light bg-dark">9:30</th>
+                <th class="text-light bg-dark">9:45</th>
+                <th class="text-light bg-dark">10:00</th>
+                <th class="text-light bg-dark">10:15</th>
+                <th class="text-light bg-dark">10:30</th>
+                <th class="text-light bg-dark">10:45</th>
+                <th class="text-light bg-dark">11:00</th>
                 <th class="text-light bg-dark">9:00</th>
                 <th class="text-light bg-dark">9:15</th>
                 <th class="text-light bg-dark">9:30</th>
@@ -41,54 +147,40 @@
                 <th class="text-light bg-dark">10:45</th>
                 <th class="text-light bg-dark">11:00</th>
 
+                <!-- <th scope="col" class="text-light bg-dark col-2"></th>
+                <th scope="col" class="text-light bg-dark col-4">9:00</th>
+                <th scope="col" class="text-light bg-dark col-4">9:15</th>
+                <th scope="col" class="text-light bg-dark col-4">9:30</th>
+                <th scope="col" class="text-light bg-dark col-4">9:45</th>
+                <th scope="col" class="text-light bg-dark col-4">10:00</th> -->
 
               </tr>
             </thead>
+
             <tbody>
+
               <tr>
-                <th scope="row" class="bg-light">THEME A: Modelling Techniques and Prototype Data
+                <th scope="row">THEME A: Modelling Techniques and Prototype Data
                       <div class="room">
                         <img src="{% static 'Attendees/Icons/location.svg' %}" width="15" height="15">
-                        <small><b>Panama</b></small>
+                        <small><b>Panama 1</b></small>
                       </div>
                 </th>
                 <td class="table-secondary">
 
-
-<!--                        EXAMPLE CARD------------------------------------------------------------- -->
-                  <a href="#" role="button" class="btn btn-fix text-left p-0" data-toggle="modal" data-target=".bd-example-modal-lg">
-                        <div class="card">
-                                Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
-                                <div class="room">
-                                  <small><b>Time</b></small>
-                                </div>
-
-                              <!-- Modal -->
-                              <div class="modal fade bd-example-modal-lg" role="dialog">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-            <!--                                    ---------------------- content   -->
-                                            <div class="col-md-10 mt-3">
-                                               <h5>Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate</h5>
-                                               <p class="text-muted"><small><b>Abstract: text </b></small> </p>
-                                               <p class="text-muted"><small><b>Speakers: Person1 </b></small> </p>
-                                               <p class="text-muted"><small><b>Room: </b></small> </p>
-                                               <p class="text-muted"><small><b>Time: </b></small> </p>
-                                               <p class="text-right">
-                                                   <button type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal">Close</button>
-                                               </p>
-                                            </div>
-            <!--                                    ---------------------- content  -->
-                                    </div>
-                                </div>
-                              </div>
-
-                        </div>
-                  </a>
-
-<!--                        EXAMPLE CARD -------------------------------------------------------------- -->
-
-
+                  <div class="card">
+                  Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
+                  </div>
+                </td>
+                <td class="table-secondary">
+                  <div class="card">
+                  Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
+                  </div>
+                </td>
+                <td class="table-secondary">
+                  <div class="card">
+                  Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
+                  </div>
                 </td>
                 <td class="table-secondary">
                   <div class="card">
@@ -108,7 +200,7 @@
               </tr>
 
               <tr>
-                <th scope="row" class="bg-light">THEME B: Coastal Hydrodynamics and Morphology
+                <th scope="row">THEME B: Coastal Hydrodynamics and Morphology
                   <div class="room">
                         <img src="{% static 'Attendees/Icons/location.svg' %}" width="15" height="15">
                         <small><b>Barcelona 4</b></small>
@@ -136,10 +228,21 @@
                   Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
                   </div>
                 </td>
+                <td class="table-secondary">
+                  <div class="card">
+                  Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
+                  </div>
+                </td>
+                <td class="table-secondary">
+                  <div class="card">
+                  Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
+                  </div>
+                </td>
+
               </tr>
 
               <tr>
-                <th scope="row" class="bg-light">THEME C: Surface Water and Groundwater Hydrology
+                <th scope="row">THEME C: Surface Water and Groundwater Hydrology
                   <div class="room">
                         <img src="{% static 'Attendees/Icons/location.svg' %}" width="15" height="15">
                         <small><b>Madril Hall</b></small>
@@ -165,26 +268,7 @@
                   Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
                   </div>
                 </td>
-              </tr>
-
-              <tr>
-                <th scope="row">THEME D: Integrated Watershed Management
-                  <div class="room">
-                        <img src="{% static 'Attendees/Icons/location.svg' %}" width="15" height="15">
-                        <small><b>Panama 4</b></small>
-                  </div>
-                </th>
-                <td class="table-secondary">
-                  <div class="card">
-                  Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
-                  </div>
-                </td>
-                <td class="table-secondary">
-                  <div class="card">
-                  Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
-                  </div>
-                </td>
-                <td class="table-secondary">
+                 <td class="table-secondary">
                   <div class="card">
                   Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
                   </div>
@@ -197,10 +281,10 @@
               </tr>
 
               <tr>
-                <th scope="row">THEME E: River Basin Management
+                <th scope="row">THEME C: Surface Water and Groundwater Hydrology
                   <div class="room">
                         <img src="{% static 'Attendees/Icons/location.svg' %}" width="15" height="15">
-                        <small><b>Berlin 1</b></small>
+                        <small><b>Madril Hall</b></small>
                   </div>
                 </th>
                 <td class="table-secondary">
@@ -223,13 +307,24 @@
                   Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
                   </div>
                 </td>
+                 <td class="table-secondary">
+                  <div class="card">
+                  Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
+                  </div>
+                </td>
+                <td class="table-secondary">
+                  <div class="card">
+                  Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
+                  </div>
+                </td>
               </tr>
 
-             <tr>
-                <th scope="row">THEME F: Climate Change
+
+              <tr>
+                <th scope="row">THEME C: Surface Water and Groundwater Hydrology
                   <div class="room">
                         <img src="{% static 'Attendees/Icons/location.svg' %}" width="15" height="15">
-                        <small><b>Barcelona 5</b></small>
+                        <small><b>Madril Hall</b></small>
                   </div>
                 </th>
                 <td class="table-secondary">
@@ -252,13 +347,24 @@
                   Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
                   </div>
                 </td>
+                 <td class="table-secondary">
+                  <div class="card">
+                  Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
+                  </div>
+                </td>
+                <td class="table-secondary">
+                  <div class="card">
+                  Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
+                  </div>
+                </td>
               </tr>
 
-             <tr>
-                <th scope="row">Special Session: Non-Instrusive Measuring Techniques for Free-Surface
+
+              <tr>
+                <th scope="row">THEME E: Surface Water and Groundwater Hydrology
                   <div class="room">
                         <img src="{% static 'Attendees/Icons/location.svg' %}" width="15" height="15">
-                        <small><b>Roma 2</b></small>
+                        <small><b>Madril Hall</b></small>
                   </div>
                 </th>
                 <td class="table-secondary">
@@ -281,48 +387,28 @@
                   Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
                   </div>
                 </td>
+                 <td class="table-secondary">
+                  <div class="card">
+                  Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
+                  </div>
+                </td>
+                <td class="table-secondary">
+                  <div class="card">
+                  Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
+                  </div>
+                </td>
               </tr>
-
 
             </tbody>
+
         </table>
-         </div>
+</div>
 
-            <!--            MONDAY CONTENT ------------------------------------------------------------------------ -->
-
-
-        </tab>
-
-
-        <tab name="Tuesday">
-
-            <!--            TUESDAY CONTENT ------------------------------------------------------------------------ -->
-          Tuesday content
-
-            <!--            TUESDAY CONTENT ------------------------------------------------------------------------ -->
-
-
-        </tab>
-
-
-        <tab name="Wednesday">
-
-            <!--            Wednesday CONTENT ------------------------------------------------------------------------ -->
-          Wednesday content
-
-            <!--            Wednesday CONTENT ------------------------------------------------------------------------ -->
-        </tab>
-
-      </tabs>
-
-    </div>
+<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+<script src="{% static 'Calendar/main.js' %}"></script>
 
 
 
-
-  <script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
-  <script src="{% static 'Calendar/main2.js' %}"></script>
 
 
 {% endblock %}
-

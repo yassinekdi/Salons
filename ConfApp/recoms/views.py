@@ -54,30 +54,6 @@ def RecomAtnListView(request):
 
     return render(request,template,context)
 
-# class RecomAtnListView(TaggedObjectList):
-#     model = Account
-#     template_name='recoms/RecomAtn_page.html'
-#     context_object_name='users'
-#     paginate_by = 5
-#
-#     def get_queryset(self):
-#         # AFTER: do this only for recommended USERS
-#
-#         # turn kwords into lists
-#
-#         # treat lists using vocab2
-#
-#         # add tags
-#
-#         # turning kwords into lists
-#         # for user in Account.objects.all():
-#             # kwords_tolist = user.key_words.split(',')
-#             # kwords_tolist = ','.join()
-#             # user.key_words = kwords_tolist
-#             # user.save()
-#         return Account.objects.exclude(id=24)
-
-
 
 
 # -------------------------------- Get corpus  of RF2018 titles -------------------------------

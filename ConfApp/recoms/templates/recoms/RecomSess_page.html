@@ -25,11 +25,11 @@
         {% for sess in sessions %}
             <div class="card bg-light mb-3 mt-3 text-left" style="max-width: 40rem;">
                 <div class="card-body">
-                    <h5 class="card-title">{{ sess.title }}</h5>
-                    <p class="card-text">{{ sess.authors }}</p>
+                    <h5 class="card-title">{{ sess.Title }}</h5>
+                    <p class="card-text">{{ sess.Authors }}</p>
                     <p class="card-text text-right">
                         <img src="{% static 'Attendees/Icons/calendar.svg' %}" width="20" height="20">
-                        {{ sess.timestamp }}
+                        Time start
                         <a href="#" class="btn btn-outline-dark btn-sm">Reminder</a>
                     </p>
                 </div>

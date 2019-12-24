@@ -142,15 +142,15 @@ STATIC_URL = '/static/'
 WEBPACK_LOADER = {
     'DEFAULT' : {
         'CACHE' : not DEBUG,
-        'BUNDLE_DIR_NAME': '',  # must end with slash
+        'BUNDLE_DIR_NAME': '/bundles/',  # must end with slash
         'STATS_FILE': os.path.join(BASE_DIR, '../program/webpack-stats.json'),
         'POLL_INTERVAL': 0.1,
         'TIMEOUT': None,
-        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map']
     }
 }
 
 
+
 AUTH_USER_MODEL = 'Account.Account'
 
-print('BASE DIR IS ', BASE_DIR)

@@ -1,0 +1,81 @@
+.box {
+            display: flex;
+          }
+
+.band{
+  background-color: #f7f7f7;
+}
+
+.room {
+position:relative;
+padding-top:15px;
+
+}
+
+
+
+
+.left{
+float: left;
+width: 30%;
+height: 200px;
+border: 1px solid black;
+}
+
+.center{
+float: left;
+width: 100%;
+height: auto;
+overflow: hidden;
+}
+
+.center.active {
+  background: rgba(255,255,255,0.3);
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+  tranform: scale(1);
+}
+
+.right{
+float: right;
+width: 30%;
+height: 200px;
+border: 1px solid black;
+}
+
+table {
+
+  table-layout: fixed;
+  width: 100px;
+}
+
+
+th,
+td {
+  width: 100px;
+  overflow: hidden;
+  z-index: 25;
+}
+
+th:first-child, td:first-child
+{
+  position:sticky;
+  left:0px;
+
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}
+
+
+
+
+
+

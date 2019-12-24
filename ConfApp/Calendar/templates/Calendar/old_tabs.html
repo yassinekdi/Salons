@@ -3,21 +3,18 @@
 {% block content %}
 {% load static %}
 
-<head>
+
+  <head>
     <meta charset="utf-8">
-    <title></title>
-
-<link rel="stylesheet" href="{% static 'Calendar/style4.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <link rel="stylesheet" href="{% static 'Calendar/style3.css' %}" />
   </head>
-
-
 
     <div id="app" class="mt-4">
       <tabs>
         <tab name= "Monday" :selected="true">
-<!--            MONDAY CONTENT ------------------------------------------------------------------------ -->
-         <div class = "center" id="content" ref="content">
-          <table class="table">
+<!--          ------------------------------------ MONDAY                        -->
+     <table class="table">
             <thead>
             <col width="250">
             <col width="300">
@@ -40,13 +37,21 @@
                 <th class="text-light bg-dark">10:30</th>
                 <th class="text-light bg-dark">10:45</th>
                 <th class="text-light bg-dark">11:00</th>
-
+                <th class="text-light bg-dark">9:00</th>
+                <th class="text-light bg-dark">9:15</th>
+                <th class="text-light bg-dark">9:30</th>
+                <th class="text-light bg-dark">9:45</th>
+                <th class="text-light bg-dark">10:00</th>
+                <th class="text-light bg-dark">10:15</th>
+                <th class="text-light bg-dark">10:30</th>
+                <th class="text-light bg-dark">10:45</th>
+                <th class="text-light bg-dark">11:00</th>
 
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row" class="bg-light">THEME A: Modelling Techniques and Prototype Data
+                <th scope="row">THEME A: Modelling Techniques and Prototype Data
                       <div class="room">
                         <img src="{% static 'Attendees/Icons/location.svg' %}" width="15" height="15">
                         <small><b>Panama</b></small>
@@ -56,35 +61,46 @@
 
 
 <!--                        EXAMPLE CARD------------------------------------------------------------- -->
-                  <a href="#" role="button" class="btn btn-fix text-left p-0" data-toggle="modal" data-target=".bd-example-modal-lg">
-                        <div class="card">
-                                Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
-                                <div class="room">
-                                  <small><b>Time</b></small>
-                                </div>
+                  <div class="card">
+                  Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate
+
+                    <div class="d-flex justify-content-between room">
+                      <small><b>Time</b></small>
+
+                      <button type="button" class="btn btn-outline-dark btn-sm mb-3" data-toggle="modal" data-target=".bd-example-modal-lg">
+                              More ...
+                            </button>
 
                               <!-- Modal -->
-                              <div class="modal fade bd-example-modal-lg" role="dialog">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
+                       <div class="modal fade bd-example-modal-lg" role="dialog">
+                         <div class="modal-dialog modal-lg">
+                           <div class="modal-content">
             <!--                                    ---------------------- content   -->
-                                            <div class="col-md-10 mt-3">
-                                               <h5>Impact Assessment of Climate Change in the Midori River Basin with Large Ensemble Climate</h5>
-                                               <p class="text-muted"><small><b>Abstract: text </b></small> </p>
-                                               <p class="text-muted"><small><b>Speakers: Person1 </b></small> </p>
-                                               <p class="text-muted"><small><b>Room: </b></small> </p>
-                                               <p class="text-muted"><small><b>Time: </b></small> </p>
-                                               <p class="text-right">
+                                   <div class="row no-gutters">
+                                       <div class="col-md-2">
+                                           <div class="thumb-lg member-thumb ml-3 mt-3">
+                                              blablabla
+                                           </div>
+                                       </div>
+                                       <div class="col-md-10 mt-3">
+
+                                               <h5>blablabla</h5>
+                                               <p class="text-muted"><small><b>blablabla </b></small> </p>
+                                               <p class="text-muted"><small><b>blablabla </b></small> </p>
+
+                                               <p class="text-muted"><small><b>Webpages: </b></small> </p>
+                                               <p class="text-right mr-3">
                                                    <button type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal">Close</button>
                                                </p>
-                                            </div>
-            <!--                                    ---------------------- content  -->
-                                    </div>
-                                </div>
-                              </div>
 
-                        </div>
-                  </a>
+                                       </div>
+                                   </div>
+            <!--                                    ---------------------- content  -->
+                           </div>
+                         </div>
+                       </div>
+ </div>
+                  </div>
 
 <!--                        EXAMPLE CARD -------------------------------------------------------------- -->
 
@@ -108,7 +124,7 @@
               </tr>
 
               <tr>
-                <th scope="row" class="bg-light">THEME B: Coastal Hydrodynamics and Morphology
+                <th scope="row">THEME B: Coastal Hydrodynamics and Morphology
                   <div class="room">
                         <img src="{% static 'Attendees/Icons/location.svg' %}" width="15" height="15">
                         <small><b>Barcelona 4</b></small>
@@ -139,7 +155,7 @@
               </tr>
 
               <tr>
-                <th scope="row" class="bg-light">THEME C: Surface Water and Groundwater Hydrology
+                <th scope="row">THEME C: Surface Water and Groundwater Hydrology
                   <div class="room">
                         <img src="{% static 'Attendees/Icons/location.svg' %}" width="15" height="15">
                         <small><b>Madril Hall</b></small>
@@ -286,42 +302,43 @@
 
             </tbody>
         </table>
-         </div>
-
-            <!--            MONDAY CONTENT ------------------------------------------------------------------------ -->
 
 
+
+
+<!--          ------------------------------------ MONDAY                        -->
         </tab>
 
 
         <tab name="Tuesday">
+<!--          ------------------------------------- TUESDAY                      -->
+tuesday content
 
-            <!--            TUESDAY CONTENT ------------------------------------------------------------------------ -->
-          Tuesday content
-
-            <!--            TUESDAY CONTENT ------------------------------------------------------------------------ -->
-
-
+<!--          ----------------------------------- TUESDAY                        -->
         </tab>
-
 
         <tab name="Wednesday">
 
-            <!--            Wednesday CONTENT ------------------------------------------------------------------------ -->
-          Wednesday content
+<!--          ----------------------------------- WEDBESDAY                      -->
+wednesday content
 
-            <!--            Wednesday CONTENT ------------------------------------------------------------------------ -->
+<!--          ----------------------------------- WEDBESDAY                      -->
+
         </tab>
-
+        <tab name="Thursday">
+          Thursday content
+        </tab>
+        <tab name="Friday">
+          Friday content
+        </tab>
       </tabs>
 
     </div>
 
 
 
-
   <script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
-  <script src="{% static 'Calendar/main2.js' %}"></script>
+  <script src="{% static 'Calendar/main.js' %}"></script>
 
 
 {% endblock %}
