@@ -1,10 +1,11 @@
 from django.db import models
 from Account.models import Account
-
+from Conference.models import Conference
 
 class Discussion(models.Model):
     slug = models.SlugField(max_length=250, null=True,blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
+    pariticipants = models.ManyToManyField(Account, related_name='discussions')
 
 
     def __str__(self):

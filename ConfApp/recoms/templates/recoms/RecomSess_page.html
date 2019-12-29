@@ -4,6 +4,7 @@
 <head>
     <link rel="stylesheet" href="{% static 'recoms/styles.css' %}" />
 </head>
+
 <div class="row">
     <div class="col-3">
         <div class="card-body">
@@ -27,11 +28,26 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ sess.Title }}</h5>
                     <p class="card-text">{{ sess.Authors }}</p>
-                    <p class="card-text text-right">
-                        <img src="{% static 'Attendees/Icons/calendar.svg' %}" width="20" height="20">
-                        Time start
-                        <a href="#" class="btn btn-outline-dark btn-sm">Reminder</a>
-                    </p>
+                     <div class="d-flex justify-content-between">
+                                            <div class="text-primary">
+                                              <small><b>{{ sess.Start_timeC }} - {{sess.Final_timeC}}</b></small>
+                                            </div>
+                                            <div class="room">
+                                                {% if sess in user_sessions %}
+                                                    <a href="{% url 'remove_reminder' sess.id %}" role="button" class="btn btn-fix text-left p-0">
+                                                        <img src="{% static 'Attendees/Icons/calendar.svg' %}" width="20" height="20">
+                                                            <small class="text-primary"><b>Saved</b></small>
+                                                    </a>
+                                                        {% else %}
+                                                    <a href="{% url 'add_reminder' sess.id %}" role="button" class="btn btn-fix text-left p-0">
+                                                        <img src="{% static 'Attendees/Icons/calendar.svg' %}" width="20" height="20">
+                                                            <small><b>Reminder</b></small>
+                                                    </a>
+
+                                                    {% endif %}
+
+                                            </div>
+                                        </div>
                 </div>
             </div>
         {% endfor %}

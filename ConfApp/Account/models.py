@@ -49,12 +49,18 @@ class Account(AbstractUser):
     is_presenting = models.BooleanField(verbose_name='Presenting',default=False)
     sex = models.CharField(verbose_name="Sex", choices=Sex_choice, max_length=6)
     country = models.CharField(verbose_name="Country", max_length=20, default="Country")
+
+
     username = None
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
     objects = MyAccountManager()
 
+    class Meta:
+        permissions = {
+            ('in_this_conference','if user is accepted in conference')
+        }
 
 
     def __str__(self):

@@ -14,6 +14,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.room_name = self.scope['url_route']['kwargs']['disc_slug']
         self.room_group_name = 'chat_%s' % self.room_name
 
+
         await self.channel_layer.group_add(
             self.room_group_name,
             self.channel_name
@@ -35,9 +36,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     def msg_to_json(self, message):
         msg_time = message.timestamp
-        hour,minute,am_pm,month,day = msg_time.hour,msg_time.minute,msg_time.strftime('%p'),\
-                                      msg_time.strftime('%b'),msg_time.day
-        msg_time_str = str(hour) +':'+str(minute)+' '+ am_pm + ' | ' + month + ' '+ str(day)
+        hour,minute,month,day = msg_time.hour,msg_time.minute, msg_time.strftime('%b'),msg_time.day
+        msg_time_str = str(hour) +':'+str(minute)+' ' + ' | ' + month + ' '+ str(day)
         return {
             'id': message.id,
             'sender': message.sender.slug,
@@ -64,9 +64,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
     def new_message(self,data):
 
         sender_slug = data['from']
-        sender_account = Account.objects.get(slug=sender_slug)
-
+        sender_account = Account.objects.get_or_create(slug=sender_slug)[0]
+        print('sender account', sender_account)
         current_discussion = Discussion.objects.get(slug=data['discussion_slug'])
+        print('CURRENT DISCUSSION', current_discussion)
         receiver = [int(elt) for elt in data['discussion_slug'].split('n')[1:] if int(elt) != sender_account.id][0]
         receiver_account = Account.objects.get(id=receiver)
 
@@ -107,7 +108,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def receive(self, text_data):
         data = json.loads(text_data)
-        print('DATA COMMAND: ', data['command'])
+
         content = self.commands[data['command']](self,data)
 
         await self.channel_layer.group_send(

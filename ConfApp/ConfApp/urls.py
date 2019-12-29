@@ -18,6 +18,8 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 
 urlpatterns = [
+    path('Entry/', include('Conference.urls')),
+    path('reminder/', include('Reminder.urls')),
     path('calendar/', include('Calendar.urls')),
     path('recoms/', include('recoms.urls')),
     path('chat/',include('messaging.urls')),

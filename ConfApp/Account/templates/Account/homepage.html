@@ -3,20 +3,35 @@
 {% load static %}
 
 <br>
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col">
+         <div class="container pt-5">
+             <a href="{% url 'Attendees_search'%}">
+                <div class="d-flex flex-row justify-content-start pt-3">
+                    <div class="p-2"><img src="{% static 'Attendees/Icons/attendees.svg' %}" width="50" height="50" ></div>
+                    <div class="p-2 text-dark"><h3>Attendees</h3></div>
+                </div>
+             </a>
 
-<div class="container">
-    <div class="texter-center card-box pt-5">
-        <div class="row justify-content-center">
-            <a href="{% url 'Attendees_search'%}"><img src="{% static 'Attendees/Icons/attendees.svg' %}" width="50" height="50" > Attendees</a>
-        </div>
-        <div class="row justify-content-center pt-3">
-            <a href="{% url 'calendar'%}"><img src="{% static 'Attendees/Icons/list.png' %}" width="50" height="50"> Program</a>
-        </div>
-        <div class="row justify-content-center pt-3">
-           <a href="{% url 'recoms_sess'%}"><img src="{% static 'Attendees/Icons/information.svg' %}" width="40" height="40"> Recommendations </a>
-        </div>
+             <a href="{% url 'calendar'%}">
+                <div class="d-flex flex-row justify-content-start pt-3">
+                    <div class="p-2"><img src="{% static 'Attendees/Icons/list.png' %}" width="50" height="50" ></div>
+                    <div class="p-2 text-dark"><h3>Program</h3></div>
+                </div>
+             </a>
+
+             <a href="{% url 'recoms_sess'%}">
+                <div class="d-flex flex-row justify-content-start pt-3">
+                    <div class="p-2"><img src="{% static 'Attendees/Icons/information.svg' %}" width="40" height="40" ></div>
+                    <div class="p-2 text-dark"><h3>Recommendations</h3></div>
+                </div>
+             </a>
+
+         </div>
     </div>
 </div>
+
 
 
 {% endblock %}

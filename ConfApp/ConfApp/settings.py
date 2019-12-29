@@ -31,7 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'webpack_loader',
+    'Conference',
+    'Reminder',
     'Calendar',
     'tagging',
     'recoms',
@@ -73,6 +74,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'messaging.context_processors.notification',
+                'messaging.context_processors.user_sessions',
             ],
         },
     },
@@ -133,22 +135,10 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
 
-# Webpack loader
-WEBPACK_LOADER = {
-    'DEFAULT' : {
-        'CACHE' : not DEBUG,
-        'BUNDLE_DIR_NAME': '/bundles/',  # must end with slash
-        'STATS_FILE': os.path.join(BASE_DIR, '../program/webpack-stats.json'),
-        'POLL_INTERVAL': 0.1,
-        'TIMEOUT': None,
-        'IGNORE': [r'.+\.hot-update.js', r'.+\.map']
-    }
-}
+
 
 
 

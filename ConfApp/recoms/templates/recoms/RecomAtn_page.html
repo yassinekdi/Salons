@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="{% static 'recoms/styles.css' %}" />
 </head>
 <div class="row">
-
     <div class="col-3">
         <div class="card-body">
             <ul class="list-group">
@@ -48,7 +47,9 @@
                                     {% endfor %}
                             </p>
                             <p class="card-text text-right">
-                                <a href="{% url 'room' slg %}" class="btn btn-outline-dark btn-sm">Message</a>
+                                <form action="{% url 'room' slg %}" >
+                                    <input type="submit" id="message_btn"  class="btn btn-outline-dark btn-sm" value="Message" />
+                                </form>
                             </p>
 
                         </div>

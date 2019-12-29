@@ -22,7 +22,7 @@ def register(request):
             account = authenticate(email=email,password=raw_password)
             messages.success(request,'Account created!')
             login(request,account)
-            return redirect('homepage')
+            return redirect('entry')
         else:
             context['registration_form'] = form
             messages.error(request,'')
@@ -37,7 +37,7 @@ def Login(request):
     user = request.user
 
     if user.is_authenticated:
-        return redirect('homepage')
+        return redirect('entry')
     if request.POST:
         form = Login_form(request.POST)
         if form.is_valid():
@@ -48,7 +48,7 @@ def Login(request):
             if user:
                 login(request,user)
                 messages.info(request,'Logged in!')
-                return redirect('homepage')
+                return redirect('entry')
     else:
         form = Login_form()
 
@@ -94,5 +94,3 @@ def EditProfile(request):
 def conf_website(request):
     return render(request,'Account/Conference_site.html')
 
-def test(request):
-    return render(request,'Account/test.html')

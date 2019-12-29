@@ -31,7 +31,9 @@
 <!--                </span> </div>-->
 <!--            </div>-->
           </div>
-          <div class="inbox_chat">
+
+
+                <div class="inbox_chat">
                    <div class="chat_list active_chat">
                         <div class="chat_people">
                           <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}"> </div>
@@ -42,26 +44,28 @@
                         </div>
                    </div>
 
-               {% for msg,sender,date,slg in historical_disc_data %}
-                    <a href="{% url 'room' slg %}">
-                      <div class="chat_list">
-                        <div class="chat_people">
-                          <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}"> </div>
-                          <div class="chat_ib">
-                            <h5>{{ sender }} <span class="chat_date">{{ date }}</span></h5>
-                            <p>{{ msg }}</p>
+                   {% for msg,sender,date,slg in historical_disc_data %}
+                        <a href="{% url 'room' slg %}">
+                          <div class="chat_list">
+                            <div class="chat_people">
+                              <div class="chat_img"> <img src="{% static 'Attendees/Icons/user-profile.png' %}"> </div>
+                              <div class="chat_ib">
+                                <h5>{{ sender }} <span class="chat_date">{{ date }}</span></h5>
+                                <p>{{ msg }}</p>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                    </a>
-               {% endfor %}
+                        </a>
+                   {% endfor %}
+                </div>
+
 
 
 <!--                                        <div class="col-4"><input type="submit" id="message_btn"  class="btn btn-primary mt-2 btn-rounded waves-effect w-md waves-light" value="Message" /> </div>-->
 
 
 <!--            ---------------------------------------------------------    -->
-          </div>
+
         </div>
 
 
@@ -94,7 +98,7 @@
 
     chatSocket.onopen = function(e) {
         console.log("open",e)
-        old_messages();
+        // old_messages();
 
     };
 

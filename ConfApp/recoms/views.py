@@ -29,6 +29,10 @@ class RecomSessListView(ListView):
         keywords_treated = vocab2(keywords)
         recommended_sessions = instance_sessions[keywords_treated]
         indexs = [elt[0]+1 for elt in recommended_sessions]
+        for ind in indexs[:15]:
+            recommended_sess = Session.objects.get(id=ind)
+            recommended_sess.Recommended = True
+            recommended_sess.save()
         return Session.objects.filter(id__in=indexs)
 
 

@@ -1,0 +1,60 @@
+{% extends "messaging/header_messaging.html" %}
+{% block content %}
+{% load static %}
+
+
+
+<head>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+</head>
+<body>
+    <div class="container">
+        <div class="messaging pt-5">
+            <div class="inbox_msg">
+                <div class="inbox_people">
+                    <div class="headind_srch">
+                        <div class="recent_heading">
+                          <h4>Discussions</h4>
+                        </div>
+
+                    </div>
+                    <div class="inbox_chat">
+                       <div class="chat_list active_chat">
+                           <a href="{% url 'recoms_atn' %}">
+                            <div class="chat_people">
+                              <div class="chat_img"> </div>
+                              <div class="chat_ib text-info">
+                                  <b>Let me recommend you the right attendees to share with!</b>
+                              </div>
+                            </div>
+                           </a>
+                       </div>
+
+
+                 </div>
+
+                </div>
+
+                <div class="mesgs">
+                  <div class="msg_history" id="chat-space"></div>
+                  <div class="type_msg">
+                    <div class="input_msg_write">
+                      <input type="text" id="message-input" class="write_msg" placeholder="Type a message" />
+                      <button class="msg_send_btn" id="message-submit" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+
+{% endblock %}

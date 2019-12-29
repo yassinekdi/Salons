@@ -1,0 +1,113 @@
+{% extends "messaging/header_messaging.html" %}
+
+{% block content %}
+{% load static %}
+
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'Calendar/style3.css' %}" />
+  </head>
+
+<div class="row">
+    <div class="col-3">
+        <div class="card-body">
+            <ul class="list-group">
+                <a href="{% url 'reminder_sessions' %}" class="list-group-item list-group-item-action list-group-item-dark ">
+                    <img src="{% static 'Attendees/Icons/presentation.svg' %}" width="20" height="20"> Sessions
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <img src="{% static 'Attendees/Icons/attendees2.svg' %}" width="20" height="20"> Attendees
+                </a>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-7">
+        <div class="list-group mt-4">
+         {% for sess in user_sessions %}
+                <div class="list-group-item list-group-item-action">
+
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{sess.Title}}</h5>
+                        <small class="text-warning"><b>Finished</b></small>
+                    </div>
+                    <p class="mb-1">Speaker: {{sess.Speakers}}</p>
+                    <div class="d-flex w-100 justify-content-between">
+                        <div>
+                            <img src="{% static 'Attendees/Icons/location.svg' %}" width="15" height="15">
+                            <small>room: {{sess.room}}</small>
+                        </div>
+                        <div>
+                            <form action="{% url 'remove_reminder' sess.id %}" >
+                                <button type="submit" class="btn"> <img src="{% static 'Attendees/Icons/delete.svg' %}" width="20" height="20"></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+         {% endfor %}
+            </div>
+
+         <div class="list-group mt-4">
+          <a href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">Session title</h5>
+              <small class="text-warning"><b>Finished</b></small>
+            </div>
+            <p class="mb-1">Speaker</p>
+            <div class="d-flex w-100 justify-content-between">
+                <div>
+                    <img src="{% static 'Attendees/Icons/location.svg' %}" width="15" height="15">
+                    <small>Room</small>
+                </div>
+                <div>
+                    <button type="button" class="btn"> <img src="{% static 'Attendees/Icons/delete.svg' %}" width="20" height="20"></button>
+                </div>
+            </div>
+          </a>
+            </div>
+
+
+          <a href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">Session title</h5>
+                <div>
+              <img src="{% static 'Attendees/Icons/wifi.svg' %}" width="20" height="20">
+              <small class="text-success"><b>Ongoing</b></small>
+                    </div>
+            </div>
+            <p class="mb-1">Speaker</p>
+            <div class="d-flex w-100 justify-content-between">
+                <div>
+                    <img src="{% static 'Attendees/Icons/location.svg' %}" width="15" height="15">
+                    <small>Room</small>
+                </div>
+                <div>
+                    <button type="button" class="btn"> <img src="{% static 'Attendees/Icons/delete.svg' %}" width="20" height="20"></button>
+                </div>
+            </div>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">Session title</h5>
+              <small class="text-muted"><b>Starting time</b></small>
+            </div>
+            <p class="mb-1">Speaker</p>
+            <div class="d-flex w-100 justify-content-between">
+                <div>
+                    <img src="{% static 'Attendees/Icons/location.svg' %}" width="15" height="15">
+                    <small>Room</small>
+                </div>
+                <div>
+                    <button type="button" class="btn"> <img src="{% static 'Attendees/Icons/delete.svg' %}" width="20" height="20"></button>
+                </div>
+            </div>
+          </a>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}
+

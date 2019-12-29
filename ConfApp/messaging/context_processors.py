@@ -1,4 +1,5 @@
 from .models import Notification
+from Account.models import Account
 
 def notification(request):
 
@@ -11,3 +12,10 @@ def notification(request):
     return Notification.objects.none()
 
 
+
+def user_sessions(request):
+    user = request.user
+    if request.user.is_authenticated:
+        user_sess =  user.reminded_sessions.all()
+        return {'user_sessions': user_sess}
+    return Account.objects.none()
