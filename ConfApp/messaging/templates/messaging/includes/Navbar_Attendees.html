@@ -2,21 +2,30 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="{% static 'messaging/style_navbar.css' %}" />
 
-<!--    For tags  -->
-
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
   {% if user.is_authenticated %}
     <a href="{% url 'entry' %}"  class="navbar-brand"><b>Entry</b></a>
-    <div class="navbar-center"><span class="navbar-brand pt-2"><h4>Conference name</h4></span></div>
+    {% if request.user in last_conf.superusers.all %}
+       <span class="badge badge-light">STAFF</span>
+    {% endif %}
+    {% if request.user in last_conf.organizers.all %}
+       <span class="badge badge-light">ORGANIZER</span>
+    {% endif %}
+    {% if request.user in last_conf.chairs.all %}
+       <span class="badge badge-light">CHAIR</span>
+    {% endif %}
+    {% if request.user in last_conf.speakers.all %}
+       <span class="badge badge-light">SPEAKER</span>
+    {% endif %}
+    <div class="navbar-center"><span class="navbar-brand pt-2"><h4>{{ last_conf.name }}</h4></span></div>
     <div class="collapse navbar-collapse">
 
           <ul class="navbar-nav ml-auto">
               <li class="nav-item"><a class="navbar-brand" href="{% url 'homepage' %}"><img src="{% static 'Attendees/Icons/home2.svg' %}" width="25" height="25"></a></li>
               <li class="nav-item"><a class="navbar-brand" href="{% url 'reminder_sessions' %}"><img src="{% static 'Attendees/Icons/agenda.svg' %}" width="25" height="25"></a></li>
               <li class="nav-item"><a class="navbar-brand" href="#"><img src="{% static 'Attendees/Icons/notification.svg' %}" width="25" height="25"></a></li>
-<!--              <li class="nav-item" ><a class="navbar-brand" href="{% url 'room' 'last' %}" id="msg_nav"><img src="{% static 'Attendees/Icons/envelope.svg' %}" width="25" height="25"></a></li>-->
               <li class="nav-item" ><a class="navbar-brand" href="{% url 'room' 'last' %}" id="msg_nav"><img src="{% static 'Attendees/Icons/envelope.svg' %}" width="25" height="25"><sup><span class="badge badge-info">{{ notifications_count }}</span></sup></a></li>
               <li class="nav-item"><a class="navbar-brand" href="{% url 'profile_page'%}"><img src="{% static 'Attendees/Icons/man-user.svg' %}" width="25" height="25"></a></li>
               <li class="nav-item"><a class="navbar-brand" href="{% url 'logout_page' %}"><img src="{% static 'Attendees/Icons/logout2.svg' %}" width="25" height="25"></a></li>
@@ -30,7 +39,4 @@
     </div>
 </nav>
 <!-- -->
-
-<!--<sup><span class="badge badge-info">10</span></sup>-->
-
 

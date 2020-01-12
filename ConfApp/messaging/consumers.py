@@ -123,6 +123,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
 
     async def chat_message(self, event):
+        print('RECEIVED SOMTHING')
         content = event["message"]
 
 

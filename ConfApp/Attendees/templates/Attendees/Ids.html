@@ -1,8 +1,10 @@
 {% extends "messaging/header_messaging.html" %}
 {% block content %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
+
 <div class="row p-5">
     <div class="col-3"></div>
     <div class="srch_bar">
@@ -42,9 +44,7 @@
 
                         <div class="row">
                             <div class="col-4">
-                                {% if elt.is_presenting %}
                                     <span class="badge badge-dark"> speaker </span>
-                                {% endif %}
                             </div>
                         </div>
 
@@ -71,7 +71,77 @@
                                     <input type="submit" id="message_btn"  class="btn btn-outline-dark btn-sm" value="Message" />
                                 </form>
                             </div>
+                            {% if request.user in last_conf.superusers.all %}
+                            <button type="button" class="btn btn-outline-dark btn-sm mb-3" data-toggle="modal" data-target="#rights{{ elt.id }}">
+                              Rights
+                            </button>
 
+
+                            <div class="modal fade" id="rights{{ elt.id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+<!--                                    ---------------------- content   -->
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <div class="p-3">
+                                            <h5>{{elt.first_name}} {{elt.last_name}}</h5>
+
+                                            <div class="form-check">
+                                                {% if elt in last_conf.superusers.all %}
+                                                    <input class="form-check-input" type="checkbox" name="is_staff" id="C1" value="yes" checked>
+                                                {% else %}
+                                                    <input class="form-check-input" type="checkbox" name="is_staff" id="C1" value="no">
+                                                {% endif %}
+                                              <label class="form-check-label" for="C1">
+                                                Staff
+                                              </label>
+                                            </div>
+
+                                            <div class="form-check">
+                                                {% if elt in last_conf.organizers.all %}
+                                                    <input class="form-check-input" type="checkbox" name="is_organizer" id="C2" value="yes" checked>
+                                                {% else %}
+                                                    <input class="form-check-input" type="checkbox" name="is_organizer" id="C2" value="no">
+                                                {% endif %}
+                                              <label class="form-check-label" for="C2">
+                                                Organizer
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              {% if elt in last_conf.chairs.all %}
+                                                    <input class="form-check-input" type="checkbox" name="is_chair" id="C3" value="yes" checked>
+                                                {% else %}
+                                                    <input class="form-check-input" type="checkbox" name="is_chair" id="C3" value="no">
+                                                {% endif %}
+                                              <label class="form-check-label" for="C3">
+                                                Chair
+                                              </label>
+                                            </div>
+                                            <div class="form-check">
+                                              {% if elt in last_conf.speakers.all %}
+                                                    <input class="form-check-input" type="checkbox" name="is_speaker" id="C4" value="yes" checked>
+                                                {% else %}
+                                                    <input class="form-check-input" type="checkbox" name="is_speaker" id="C4" value="no">
+                                                {% endif %}
+                                              <label class="form-check-label" for="C4">
+                                                Speaker
+                                              </label>
+                                            </div>
+                                        </div>
+
+
+                                                    <div class="d-flex justify-content-between p-1">
+                                                        <button type="submit" name="{{ elt }}" class="btn btn-outline-dark btn-sm">Save</button>
+                                                        <button type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal">Close</button>
+                                                    </div>
+                                            </form>
+
+<!--                                    ---------------------- content  -->
+                                </div>
+                              </div>
+                            </div>
+
+                            {% endif %}
                             <button type="button" class="btn btn-outline-dark btn-sm mb-3" data-toggle="modal" data-target="#here{{ elt.id }}">
                               More ...
                             </button>
@@ -119,10 +189,12 @@
                     </div>
                 </div>
 
+
             {% endfor %}
 
       </div>
 </div>
+
 
 {% endblock %}
 

@@ -1,6 +1,7 @@
 from django.db import models
 from Account.models import Account
 from Conference.models import Conference
+from django.db.models.signals import post_save
 
 class Discussion(models.Model):
     slug = models.SlugField(max_length=250, null=True,blank=True)
@@ -28,3 +29,23 @@ class Notification(models.Model):
 
     def __str__(self):
         return '{}'.format(self.id)
+
+class Notification2(models.Model):
+    is_on = models.BooleanField(default=False)
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='notification2')
+    content = models.CharField(max_length=300, null=True)
+    title = models.CharField(max_length=300, null=True)
+    sender = models.CharField(max_length=20, null=True)
+
+    def __str__(self):
+        return '{}'.format(self.id)
+
+
+# def switch_on(sender, instance, *args, **kwargs):
+#     print('SWITCH ON FIRED')
+#     if not instance.is_on:
+#         instance.is_on = True
+#         instance.save()
+#         print('SWITCH ON INSTANCE CHANGED')
+#
+# post_save.connect(switch_on,sender=Notification2)

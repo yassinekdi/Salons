@@ -34,6 +34,7 @@ def register(request):
 # Login page
 def Login(request):
     context = {}
+
     user = request.user
 
     if user.is_authenticated:
@@ -55,6 +56,7 @@ def Login(request):
     context['login_form'] = form
 
     return render(request,'account/login.html',context)
+
 
 # Logout
 def Logout(request):

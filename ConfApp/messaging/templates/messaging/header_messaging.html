@@ -7,23 +7,120 @@
 <!--<script src="https://unpkg.com/feather-icons"></script>-->
 <script src="{% static 'messaging/reconnecting-websocket.js' %}"></script>
   {% include "messaging/includes/Navbar_Attendees.html" %}
+<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <body>
 
+
+<!--TOAST-->
+
+<div aria-live="polite" aria-atomic="true" style="position: absolute; top: 8%; right: 45%; z-index:999; ">
+    <div id="here2">
+
+    </div>
+
+</div>
+
+<!--TOAST-->
+
+
+
   {% block content %}
+
+
+
   {% endblock %}
 
 
 
-<!--<script>-->
-<!-- feather.replace()-->
-<!--</script>-->
+<script>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+       var ws_path = 'ws://' + window.location.host + '/home/';
+       console.log("connecting to " + ws_path)
+
+       var Socket = new ReconnectingWebSocket(ws_path);
+
+       Socket.onopen = function(e) {
+       console.log("connected ", e)
+
+
+    };
+
+
+
+       Socket.onmessage = function(message) {
+            var dict = JSON.parse(message.data);
+            var data = dict['content'];
+            console.log('PARSED CONTENT ', data['content']);
+
+            newToast(data);
+            $('.toast').toast('show');
+       };
+
+
+
+    function newToast(data) {
+
+    var div1 = document.createElement('div');
+    var div11 = document.createElement('div');
+    var strong = document.createElement('strong');
+    var small = document.createElement('small');
+    var button = document.createElement('button');
+    var span = document.createElement('span');
+    var small2 = document.createElement('small');
+    var div12 = document.createElement('div');
+    var script = document.createElement('script');
+
+    div1.className = 'toast';
+    div1.setAttribute("role","alert");
+    div1.setAttribute("data-autohide","false");
+    div1.style = "width: 280px";
+
+    div11.className = 'toast-header';
+
+    strong.className = 'mr-auto';
+    strong.textContent = data['title'];
+
+    small.textContent = data['sender'];
+
+
+    button.type = "button";
+    button.className = "ml-2 mb-1 close";
+    button.setAttribute("data-dismiss","toast");
+    button.setAttribute("aria-label","Close");
+
+    span.setAttribute("aria-hidden","true");
+
+
+    small2.textContent = "x";
+
+    div12.className = "toast-body";
+    div12.textContent = data['content'];
+
+
+    div1.appendChild(div11)
+    div11.appendChild(strong)
+    div11.appendChild(small)
+    div11.appendChild(button)
+    button.appendChild(span)
+    span.appendChild(small2)
+    div1.appendChild(div12)
+
+
+    document.querySelector('#here2').appendChild(div1);
+  };
+
+
+
+</script>
+
+
+
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>-->
 <!-- For tags -->
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
 <script text="text/javascript" src="{% static 'Account/bootstrap-tagsinput.js' %}"></script>
 <!-- Tags links finished -->
 </body>

@@ -5,7 +5,7 @@
 <br>
 <div class="row">
     <div class="col-4"></div>
-    <div class="col">
+    <div class="col-4">
          <div class="container pt-5">
              <a href="{% url 'Attendees_search'%}">
                 <div class="d-flex flex-row justify-content-start pt-3">
@@ -30,6 +30,29 @@
 
          </div>
     </div>
+    {% if request.user in last_conf.superusers.all %}
+    <div class="col-3">
+        <div class="card-body" style="width: 220px">
+            <ul class="list-group">
+                <a href="#" class="list-group-item list-group-item-action pl-1">
+                    <img src="{% static 'Attendees/Icons/training.svg' %}" width="25" height="25"> Model training
+                </a>
+                <a href="#" class="list-group-item list-group-item-action pl-1">
+                    <img src="{% static 'Attendees/Icons/knock.svg' %}" width="25" height="25"> Knocks
+                </a>
+                <a href="{% url 'Attendees_search'%}" class="list-group-item list-group-item-action pl-1">
+                    <img src="{% static 'Attendees/Icons/rights.svg' %}" width="25" height="25"> Users rights
+                </a>
+                <a href="#" class="list-group-item list-group-item-action pl-1">
+                    <img src="{% static 'Attendees/Icons/prog_correction.svg' %}" width="25" height="25"> Editing program
+                </a>
+                <a href="#" class="list-group-item list-group-item-action pl-1">
+                    <img src="{% static 'Attendees/Icons/general_msg.svg' %}" width="25" height="25"> General message
+                </a>
+            </ul>
+        </div>
+    </div>
+    {% endif %}
 </div>
 
 

@@ -104,3 +104,4 @@ def add_tag(sender,instance,**kwargs):
 
 
 post_save.connect(add_tag,sender=Account)
+

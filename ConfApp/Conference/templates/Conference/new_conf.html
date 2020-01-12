@@ -1,0 +1,48 @@
+{% extends "Conference/header_entry.html" %}
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+<div class="container p-5">
+
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-row">
+         <div class="col">
+              <label>Conference name</label>
+              {{ form.name|as_crispy_field }}
+         </div>
+      </div>
+      <div class="form-row">
+         <div class="col">
+              <label>Conference webpage</label>
+              {{ form.conf_webpage|as_crispy_field }}
+         </div>
+      </div>
+      <div class="d-flex form-row">
+        <div class="form-group col-4">
+          <label>Starting date</label>
+          {{ form.starting_date|as_crispy_field }}
+            <div class="valid-feedback">OK</div>
+        </div>
+        <div class="form-group col-4">
+          <label>Finishing date</label>
+          {{ form.finishing_date|as_crispy_field }}
+        </div>
+        <div class="form-group col-4">
+          <label>Program URL</label>
+          {{ form.program_webpage|as_crispy_field }}
+        </div>
+      </div>
+
+      <p class="text-right">
+        <button type="submit" class="btn btn-primary">Register</button>
+      </p>
+    </form>
+
+</div>
+{% endblock %}
+
+
+
