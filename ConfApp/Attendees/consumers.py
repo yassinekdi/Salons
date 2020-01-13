@@ -21,6 +21,13 @@ class Notifs(AsyncJsonWebsocketConsumer):
                 self.channel_name
             )
 
+            # -----  Group of General msg   ------
+            group_msg= "general_message"
+            await self.channel_layer.group_add(
+                group_msg,
+                self.channel_name
+            )
+
             # -----  Group of XXXXXX   ------
             # self.status_notif_group= "Notif_status_conf"+str(this_conf.id)
             #
@@ -71,6 +78,15 @@ class Notifs(AsyncJsonWebsocketConsumer):
                     'content': event
                 }
             )
+
+    async def general_message(self,event):
+        await self.send_json(
+            {
+                'type': 'general_message',
+                'content': event
+            }
+        )
+
 
     # async def join_room(self, room_id):
     #     room = await get_room_or_error(room_id, self.scope['user'])

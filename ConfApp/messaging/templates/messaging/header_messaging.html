@@ -52,11 +52,22 @@
 
        Socket.onmessage = function(message) {
             var dict = JSON.parse(message.data);
-            var data = dict['content'];
-            console.log('PARSED CONTENT ', data['content']);
+            var type = dict['type'];
 
-            newToast(data);
-            $('.toast').toast('show');
+
+            if (type == 'notif_status') {
+                var data = dict['content'];
+                newToast(data);
+                $('.toast').toast('show');
+            };
+
+            if (type == 'general_message') {
+                var data = dict['content'];
+                // console.log('MESSAGE GENERAL ', data);
+                newToast(data);
+                $('.toast').toast('show');
+            };
+
        };
 
 

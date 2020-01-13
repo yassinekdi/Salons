@@ -3,11 +3,22 @@ from .forms import RegistrationForm, Login_form, EditAccountForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .utils import send_general_msg
+from messaging.models import General_Message
 
 
 # Homepage
 @login_required(login_url='login_page')
 def homepage(request):
+    if request.POST:
+        created = len(General_Message.objects.filter(content=request.POST['text']))==0
+        if created:
+            new_msg = General_Message.objects.create(content=request.POST['text'])
+            general_msg = {'content': new_msg.content }
+            group_name = 'general_message'
+            send_general_msg(group_name, general_msg)
+
+
     return render(request,'Account/homepage.html')
 
 # Registration page

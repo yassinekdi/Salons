@@ -32,4 +32,3 @@ class EditAccountForm(UserChangeForm):
     class Meta:
         model = Account
         fields = ('first_name','last_name','email','webpage','organism','status','key_words')
-

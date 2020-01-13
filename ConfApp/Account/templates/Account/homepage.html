@@ -46,7 +46,7 @@
                 <a href="#" class="list-group-item list-group-item-action pl-1">
                     <img src="{% static 'Attendees/Icons/prog_correction.svg' %}" width="25" height="25"> Editing program
                 </a>
-                <a href="#" class="list-group-item list-group-item-action pl-1">
+                <a data-toggle="modal" data-target="#msg" class="list-group-item list-group-item-action pl-1">
                     <img src="{% static 'Attendees/Icons/general_msg.svg' %}" width="25" height="25"> General message
                 </a>
             </ul>
@@ -55,6 +55,28 @@
     {% endif %}
 </div>
 
+                            <!-- Modal -->
+                            <div class="modal fade" id="msg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+
+<!--                                    ---------------------- content   -->
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <div class="form-group p-2 mb-0">
+                                            <label for="exampleFormControlTextarea1">General Message: </label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="text"></textarea>
+                                        </div>
+                                        <div class="d-flex justify-content-between mr-1 ml-1">
+                                            <button type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-outline-dark btn-sm">Send</button>
+                                        </div>
+                                    </form>
+                                    <!--                                    ---------------------- content  -->
+
+                                </div>
+                              </div>
+                            </div>
 
 
 {% endblock %}

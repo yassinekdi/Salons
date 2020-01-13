@@ -41,11 +41,8 @@ class Notification2(models.Model):
         return '{}'.format(self.id)
 
 
-# def switch_on(sender, instance, *args, **kwargs):
-#     print('SWITCH ON FIRED')
-#     if not instance.is_on:
-#         instance.is_on = True
-#         instance.save()
-#         print('SWITCH ON INSTANCE CHANGED')
-#
-# post_save.connect(switch_on,sender=Notification2)
+class General_Message(models.Model):
+    content = models.TextField()
+
+    def __str__(self):
+        return str(self.id)
