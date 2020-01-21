@@ -10,6 +10,15 @@ class Theme(models.Model):
     def __str__(self):
         return self.title
 
+class SubTheme(models.Model):
+    title = models.CharField(verbose_name="title", max_length=50, default="title")
+    Theme = models.ForeignKey(Theme, related_name='subtheme', on_delete=models.SET_NULL, null=True)
+    exists = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
+
+
 class Session(models.Model):
 
     Status_choice = (('Not yet', 'Not yet'), ('Ongoing', 'Ongoing'), ('Finished', 'Finished'))

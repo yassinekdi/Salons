@@ -37,13 +37,13 @@
                 <a href="#" class="list-group-item list-group-item-action pl-1">
                     <img src="{% static 'Attendees/Icons/training.svg' %}" width="25" height="25"> Model training
                 </a>
-                <a href="#" class="list-group-item list-group-item-action pl-1">
-                    <img src="{% static 'Attendees/Icons/knock.svg' %}" width="25" height="25"> Knocks
-                </a>
+<!--                <a href="#" class="list-group-item list-group-item-action pl-1">-->
+<!--                    <img src="{% static 'Attendees/Icons/knock.svg' %}" width="25" height="25"> Knocks-->
+<!--                </a>-->
                 <a href="{% url 'Attendees_search'%}" class="list-group-item list-group-item-action pl-1">
                     <img src="{% static 'Attendees/Icons/rights.svg' %}" width="25" height="25"> Users rights
                 </a>
-                <a href="#" class="list-group-item list-group-item-action pl-1">
+                <a href="{% url 'editing_program'%}" class="list-group-item list-group-item-action pl-1">
                     <img src="{% static 'Attendees/Icons/prog_correction.svg' %}" width="25" height="25"> Editing program
                 </a>
                 <a data-toggle="modal" data-target="#msg" class="list-group-item list-group-item-action pl-1">

@@ -815,3 +815,34 @@ slider.addEventListener('mousemove', (e) => {
 </div>
 
 <!--TOAST-->
+
+
+
+
+
+$(function() {
+    // Remove button click
+    $(document).on(
+        'click',
+        '[data-role="appendRow"] > .ref > .input-group > .form-inline [data-role="remove"]',
+        function(e) {
+            e.preventDefault();
+            $(this).closest('.form-row').remove();
+        }
+    );
+    // Add button click
+    $(document).on(
+        'click',
+        '[data-role="appendRow"] > .ref > .input-group > .form-row > .tst [data-role="add"]',
+        function(e) {
+            e.preventDefault();
+            var container = $(this).closest('[data-role="appendRow"]');
+            new_field_group = container.children().filter('.ref:first-child').clone();
+            new_field_group.find('label').html('Theme');
+            new_field_group.find('input').each(function(){
+                $(this).val('');
+            });
+            container.append(new_field_group);
+        }
+    );
+});

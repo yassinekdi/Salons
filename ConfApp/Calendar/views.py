@@ -91,3 +91,13 @@ def remove_sess_reminder(request, sess_id):
     session.Reminded_users.remove(request.user)
     session.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def edit_program(request):
+    days = ['Day 1', 'Day 2', 'Day 3']
+    state = ['true', 'false', 'false']
+
+
+
+    context = {"days_state": zip(days, state)}
+    return render(request, 'Calendar/editing_calendar.html', context)
